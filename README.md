@@ -11,3 +11,8 @@ poetry run xsuite-prebuild
 # Handling submodules
 
 TODO
+
+
+# Other
+Remove master_jobs from git?
+Add scans to git?
