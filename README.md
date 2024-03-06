@@ -16,3 +16,5 @@ TODO
 # Other
 Remove master_jobs from git?
 Add scans to git?
+
+Replace python distribution in activate_python with your own distribution that you can get with e.g. if you use poetry poetry env list --full-path

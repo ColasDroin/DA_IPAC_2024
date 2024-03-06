@@ -5,18 +5,18 @@ import copy
 import itertools
 import json
 import os
-import shutil
 import time
 
 import numpy as np
 import yaml
-from tree_maker import initialize
-from master_study.compute_bunch_schedule import (
+from create_study_functions.compute_bunch_schedule import (
+    get_worst_bunch,
+)
+from create_study_functions.generate_run_file import (
     generate_run_sh,
     generate_run_sh_htc,
-    get_worst_bunch,
-    reformat_filling_scheme_from_lpc_alt,
 )
+from tree_maker import initialize
 
 # ==================================================================================================
 # --- Initial particle distribution parameters (generation 1)
@@ -92,8 +92,8 @@ for beam in ["lhcb1", "lhcb2"]:
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
 # Value to be added to linear coupling knobs
-d_config_tune_and_chroma["delta_cmr"] = 0.001
-d_config_tune_and_chroma["delta_cmi"] = 0.0
+d_config_tune_and_chroma["delta_cmr"] = 0.001  # type: ignore
+d_config_tune_and_chroma["delta_cmi"] = 0.0  # type: ignore
 
 ### Knobs configuration
 
@@ -122,7 +122,7 @@ d_config_knobs["i_oct_b2"] = 60.0
 
 # Leveling in IP 1/5
 d_config_leveling_ip1_5 = {"constraints": {}}
-d_config_leveling_ip1_5["luminosity"] = 2.0e34
+d_config_leveling_ip1_5["luminosity"] = 2.0e34  # type: ignore
 d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
 d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
 
@@ -146,9 +146,9 @@ d_config_leveling["ip8"]["luminosity"] = 2.0e33
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 1.4e11
-d_config_beambeam["nemitt_x"] = 2.5e-6
-d_config_beambeam["nemitt_y"] = 2.5e-6
+d_config_beambeam["num_particles_per_bunch"] = 1.4e11  # type: ignore
+d_config_beambeam["nemitt_x"] = 2.5e-6  # type: ignore
+d_config_beambeam["nemitt_y"] = 2.5e-6  # type: ignore
 
 # Filling scheme (in json format)
 # The scheme should consist of a json file containing two lists of booleans (one for each beam),
@@ -170,21 +170,21 @@ filling_scheme_path = os.path.abspath(
 if filling_scheme_path.endswith(".json"):
     with open(filling_scheme_path, "r") as fid:
         d_filling_scheme = json.load(fid)
+else:
+    raise ValueError("Only json filling schemes are supported")
 
 # If the filling scheme is already in the correct format, do nothing
-if "beam1" in d_filling_scheme.keys() and "beam2" in d_filling_scheme.keys():
-    pass
-# Otherwise, we need to reformat the file
-else:
-    # One can potentially use b1_array, b2_array to scan the bunches later
-    b1_array, b2_array = reformat_filling_scheme_from_lpc_alt(filling_scheme_path)
-    filling_scheme_path = filling_scheme_path.replace(".json", "_converted.json")
+if "beam1" not in d_filling_scheme.keys() or "beam2" not in d_filling_scheme.keys():
+    raise ValueError(
+        "The filling scheme must contain two arrays of booleans, one for each beam, representing"
+        " the trains of bunches"
+    )
 
 
 # Add to config file
-d_config_beambeam["mask_with_filling_pattern"][
-    "pattern_fname"
-] = filling_scheme_path  # If None, a full fill is assumed
+d_config_beambeam["mask_with_filling_pattern"]["pattern_fname"] = (
+    filling_scheme_path  # If None, a full fill is assumed
+)
 
 # Initialize bunch number to None (will be set later)
 d_config_beambeam["mask_with_filling_pattern"]["i_bunch_b1"] = None
@@ -333,7 +333,7 @@ for idx_job, (track, qx, qy) in enumerate(itertools.product(track_array, array_q
 
     # Complete the dictionnary for the tracking
     d_config_simulation["particle_file"] = f"../particles/{track:02}.parquet"
-    d_config_simulation["collider_file"] = f"../collider/collider.json"
+    d_config_simulation["collider_file"] = "../collider/collider.json"
 
     # Add a child to the second generation, with all the parameters for the collider and tracking
     children["base_collider"]["children"][f"xtrack_{idx_job:04}"] = {
