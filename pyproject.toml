@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "da-ipac-2024"
+version = "0.1.0"
+description = "DA simulations for IPAC 2024"
+authors = ["Colas Droin <colas.noe.droin@cern.ch>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ipython = "^8.22.2"
+numpy = "^1.26.4"
+scipy = "^1.12.0"
+pandas = "^2.2.1"
+fastparquet = "^2024.2.0"
+psutil = "^5.9.8"
+cpymad = "^1.15.0"
+xsuite = "^0.6.0"
+tree-maker = {git = "ssh://git@github.com/xsuite/tree_maker.git"}
+xmask = {path = "external_dependencies/xmask", develop = true}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
