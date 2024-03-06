@@ -56,7 +56,7 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 # Optic file path (version, and round or flat)
 
 ### For v1.6 optics
-d_config_mad["links"]["acc-models-lhc"] = "../../../../modules/hllhc16"
+d_config_mad["links"]["acc-models-lhc"] = "../../../../../external_dependencies/acc-models-lhc"
 d_config_mad["optics_file"] = "acc-models-lhc/strengths/ramp/opt_ramp_500_1500_thin.madx"
 d_config_mad["ver_hllhc_optics"] = 1.6
 
@@ -154,7 +154,7 @@ d_config_beambeam["nemitt_y"] = 2.5e-6  # type: ignore
 # The scheme should consist of a json file containing two lists of booleans (one for each beam),
 # representing each bucket of the LHC.
 filling_scheme_path = os.path.abspath(
-    "master_jobs/filling_scheme/8b4e_1972b_1960_1178_1886_224bpi_12inj_800ns_bs200ns.json"
+    "../filling_scheme/8b4e_1972b_1960_1178_1886_224bpi_12inj_800ns_bs200ns.json"
 )
 
 # Alternatively, one can get a fill directly from LPC from, e.g.:
@@ -354,7 +354,7 @@ config = yaml.safe_load(open("config.yaml"))
 config["root"]["children"] = children
 
 # Set miniconda environment path in the config
-config["root"]["setup_env_script"] = os.getcwd() + "/../activate_miniforge.sh"
+config["root"]["setup_env_script"] = os.getcwd() + "../../source_python.sh"
 
 
 # Recursively define the context for the simulations
@@ -373,11 +373,11 @@ set_context(children, 1, config)
 study_name = "example_tunescan"
 
 # Creade folder that will contain the tree
-if not os.path.exists(f"scans/{study_name}"):
-    os.makedirs(f"scans/{study_name}")
+if not os.path.exists(f"../scans/{study_name}"):
+    os.makedirs(f"../scans/{study_name}")
 
 # Move to the folder that will contain the tree
-os.chdir(f"scans/{study_name}")
+os.chdir(f"../scans/{study_name}")
 
 # Clean the id_job file
 id_job_file_path = "id_job.yaml"

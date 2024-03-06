@@ -17,7 +17,7 @@ start = time.time()
 
 # Load Data
 study_name = "example_tunescan"
-fix = f"/scans/{study_name}"
+fix = f"../scans/{study_name}"
 root = tree_maker.tree_from_json(fix[1:] + "/tree_maker.json")
 # Add suffix to the root node path to handle scans that are not in the root directory
 root.add_suffix(suffix=fix)
@@ -137,7 +137,7 @@ my_final = pd.DataFrame(
 ).transpose()
 
 # Save data and print time
-my_final.to_parquet(f"scans/{study_name}/da.parquet")
+my_final.to_parquet(f"../scans/{study_name}/da.parquet")
 print("Final dataframe for current set of simulations: ", my_final)
 end = time.time()
 print("Elapsed time: ", end - start)

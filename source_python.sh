@@ -1,7 +1,9 @@
-# Get python environment directory from poetry, or from a manual path if not possible
+# Get current directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Get python environment directory from poetry, or from local environment created by poetry if not possible
 { 
     poetry shell &&
 } || { # Replace with you own python dir
-    SCRIPT_DIR=/home/cdroin/.cache/pypoetry/virtualenvs/da-ipac-2024-9zWX8Y7C-py3.10
-    source $SCRIPT_DIR/miniforge/bin/activate
+    source $SCRIPT_DIR/.venv/bin/activate
 }
