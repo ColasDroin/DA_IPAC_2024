@@ -49,15 +49,14 @@ def tree_maker_tagging(config, tag="started"):
 # ==================================================================================================
 def get_context(configuration):
     if configuration["context"] == "cupy":
-        context = xo.ContextCupy()
+        return xo.ContextCupy()
     elif configuration["context"] == "opencl":
-        context = xo.ContextPyopencl()
+        return xo.ContextPyopencl()
     elif configuration["context"] == "cpu":
-        context = xo.ContextCpu()
+        return xo.ContextCpu()
     else:
         logging.warning("context not recognized, using cpu")
-        context = xo.ContextCpu()
-    return context
+        return xo.ContextCpu()
 
 
 # ==================================================================================================
@@ -72,7 +71,7 @@ def read_configuration(config_path="config.yaml"):
     try:
         with open("../" + config_path, "r") as fid:
             config_gen_1 = ryaml.load(fid)
-    except:
+    except Exception:
         with open("../1_build_distr_and_collider/" + config_path, "r") as fid:
             config_gen_1 = ryaml.load(fid)
 
@@ -161,17 +160,15 @@ def compute_collision_from_scheme(config_bb):
     # Get the filling scheme path (in json or csv format)
     filling_scheme_path = config_bb["mask_with_filling_pattern"]["pattern_fname"]
 
-    # Load the filling scheme
-    if filling_scheme_path.endswith(".json"):
-        with open(filling_scheme_path, "r") as fid:
-            filling_scheme = json.load(fid)
-    else:
+    if not filling_scheme_path.endswith(".json"):
         raise ValueError(
             f"Unknown filling scheme file format: {filling_scheme_path}. It you provided a csv"
             " file, it should have been automatically convert when running the script"
             " 001_make_folders.py. Something went wrong."
         )
 
+    with open(filling_scheme_path, "r") as fid:
+        filling_scheme = json.load(fid)
     # Extract booleans beam arrays
     array_b1 = np.array(filling_scheme["beam1"])
     array_b2 = np.array(filling_scheme["beam2"])
@@ -208,27 +205,29 @@ def do_levelling(
     initial_I = config_bb["num_particles_per_bunch"]
 
     # First level luminosity in IP 1/5 changing the intensity
-    if "config_lumi_leveling_ip1_5" in config_collider:
-        if not config_collider["config_lumi_leveling_ip1_5"]["skip_leveling"]:
-            print("Leveling luminosity in IP 1/5 varying the intensity")
-            # Update the number of bunches in the configuration file
-            config_collider["config_lumi_leveling_ip1_5"]["num_colliding_bunches"] = int(
-                n_collisions_ip1_and_5
+    if (
+        "config_lumi_leveling_ip1_5" in config_collider
+        and not config_collider["config_lumi_leveling_ip1_5"]["skip_leveling"]
+    ):
+        print("Leveling luminosity in IP 1/5 varying the intensity")
+        # Update the number of bunches in the configuration file
+        config_collider["config_lumi_leveling_ip1_5"]["num_colliding_bunches"] = int(
+            n_collisions_ip1_and_5
+        )
+
+        # Do the levelling
+        try:
+            I = luminosity_leveling_ip1_5(
+                collider,
+                config_collider,
+                config_bb,
+                crab=crab,
             )
+        except ValueError:
+            print("There was a problem during the luminosity leveling in IP1/5... Ignoring it.")
+            I = config_bb["num_particles_per_bunch"]
 
-            # Do the levelling
-            try:
-                I = luminosity_leveling_ip1_5(
-                    collider,
-                    config_collider,
-                    config_bb,
-                    crab=crab,
-                )
-            except ValueError:
-                print("There was a problem during the luminosity leveling in IP1/5... Ignoring it.")
-                I = config_bb["num_particles_per_bunch"]
-
-            config_bb["num_particles_per_bunch"] = float(I)
+        config_bb["num_particles_per_bunch"] = float(I)
 
     # Set up the constraints for lumi optimization in IP8
     additional_targets_lumi = []
@@ -284,7 +283,7 @@ def add_linear_coupling(conf_knobs_and_tuning, collider, config_mad):
     if version_run == 3.0:
         collider.vars["cmrs.b1_sq"] += conf_knobs_and_tuning["delta_cmr"]
         collider.vars["cmrs.b2_sq"] += conf_knobs_and_tuning["delta_cmr"]
-    elif version_hllhc == 1.6 or version_hllhc == 1.5:
+    elif version_hllhc in [1.6, 1.5]:
         collider.vars["c_minus_re_b1"] += conf_knobs_and_tuning["delta_cmr"]
         collider.vars["c_minus_re_b2"] += conf_knobs_and_tuning["delta_cmr"]
     else:
@@ -405,7 +404,7 @@ def record_final_luminosity(collider, config_bb, l_n_collisions, crab):
                 crab=crab,
             )
             PU = compute_PU(L, n_col, twiss_b1["T_rev0"])
-        except:
+        except Exception:
             print(f"There was a problem during the luminosity computation in {ip}... Ignoring it.")
             L = 0
             PU = 0
@@ -647,7 +646,7 @@ def configure_and_track(config_path="config.yaml"):
     try:
         os.system("rm -rf correction")
         os.system("rm -f *.cc")
-    except:
+    except Exception:
         pass
 
     # Tag end of the job

@@ -1,7 +1,6 @@
 # ==================================================================================================
 # --- Imports
 # ==================================================================================================
-import logging
 import time
 
 import pandas as pd
@@ -18,7 +17,7 @@ start = time.time()
 
 # Load Data
 study_name = "example_tunescan"
-fix = "/scans/" + study_name
+fix = f"/scans/{study_name}"
 root = tree_maker.tree_from_json(fix[1:] + "/tree_maker.json")
 # Add suffix to the root node path to handle scans that are not in the root directory
 root.add_suffix(suffix=fix)
@@ -43,8 +42,7 @@ for node in root.generation(1):
                     f"{node_child.get_abs_path()}/{config_child['config_simulation']['particle_file']}"
                 )
 
-            # If it doesn't work, try to read it as absolute
-            except:
+            except Exception:
                 particle = pd.read_parquet(f"{config_child['config_simulation']['particle_file']}")
 
             df_sim = pd.read_parquet(f"{node_child.get_abs_path()}/output_particles.parquet")
@@ -65,7 +63,7 @@ for node in root.generation(1):
         dic_child_simulation = node_child.parameters["config_simulation"]
         try:
             dic_parent_collider = node.parameters["config_mad"]
-        except:
+        except Exception:
             print("No parent collider could be loaded")
         dic_parent_particles = node.parameters["config_particles"]
 

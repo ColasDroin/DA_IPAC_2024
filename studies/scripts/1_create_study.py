@@ -373,11 +373,11 @@ set_context(children, 1, config)
 study_name = "example_tunescan"
 
 # Creade folder that will contain the tree
-if not os.path.exists("scans/" + study_name):
-    os.makedirs("scans/" + study_name)
+if not os.path.exists(f"scans/{study_name}"):
+    os.makedirs(f"scans/{study_name}")
 
 # Move to the folder that will contain the tree
-os.chdir("scans/" + study_name)
+os.chdir(f"scans/{study_name}")
 
 # Clean the id_job file
 id_job_file_path = "id_job.yaml"
@@ -388,7 +388,7 @@ if os.path.isfile(id_job_file_path):
 start_time = time.time()
 root = initialize(config)
 print("Done with the tree creation.")
-print("--- %s seconds ---" % (time.time() - start_time))
+print(f"--- {time.time() - start_time} seconds ---")
 
 # Check if htcondor is the configuration
 if "htc" in config["root"]["generations"][2]["run_on"]:
@@ -400,4 +400,4 @@ else:
 start_time = time.time()
 root.make_folders(generate_run)
 print("The tree folders are ready.")
-print("--- %s seconds ---" % (time.time() - start_time))
+print(f"--- {time.time() - start_time} seconds ---")
