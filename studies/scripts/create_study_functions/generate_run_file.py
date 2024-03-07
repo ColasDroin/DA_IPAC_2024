@@ -28,7 +28,6 @@ def generate_run_sh_htc(node, generation_number):
         return generate_run_sh(node, generation_number)
 
 
-# TODO Rename this here and in `generate_run_sh_htc`
 def _generate_run_sh_htc_gen_2(node, python_command):
     # Get local path and abs path to gen 2
     abs_path = node.get_abs_path()

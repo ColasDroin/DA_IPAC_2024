@@ -158,8 +158,7 @@ class ClusterSubmission:
 
             # Update (write on disk) dic_id_to_job
             self.dic_id_to_job = dic_id_to_job
-        else:
-            print("Warning: id-job file is missing...")
+
 
     def _get_state_jobs(self, dic_id_to_job=None, verbose=True):
         if dic_id_to_job is None:
@@ -180,8 +179,8 @@ class ClusterSubmission:
         if not path_node.endswith("/"):
             path_job += "/"
 
-        # Only get path after master_study
-        path_job = path_job.split("master_study")[1]
+        # Only get path after studies
+        path_job = path_job.split("studies")[1]
 
         return path_job
 
@@ -342,7 +341,7 @@ class ClusterSubmission:
                     output = process.stdout.decode("utf-8")
                     output_error = process.stderr.decode("utf-8")
                     if "ERROR" in output_error:
-                        raise RuntimeError(f"Error in submission: {output}")
+                        raise RuntimeError(f"Error in submission: {output_error}")
                     for line in output.split("\n"):
                         if "htc" in self.run_on:
                             if "cluster" in line:
@@ -387,8 +386,8 @@ class ClusterSubmission:
             if len(aux) > 1 and "run.sh" in aux[-1]:
                 job = str(Path(aux[-1]).parent)
 
-                # Only get path after master_study
-                job = job.split("master_study")[1]
+                # Only get path after studies
+                job = job.split("studies")[1]
 
                 l_jobs.append(f"{job}/")
         return l_jobs
@@ -433,8 +432,8 @@ class ClusterSubmission:
                     ).stdout.decode("utf-8")
                     job = job_details.split('Cmd = "')[1].split("run.sh")[0]
 
-                    # Only get path after master_study
-                    job = job.split("master_study")[1]
+                    # Only get path after studies
+                    job = job.split("studies")[1]
                     l_jobs.append(job)
 
                 elif first_line:
@@ -493,8 +492,8 @@ class ClusterSubmission:
                     if "run.sh" in job_details
                     else job_details.split("StdOut=")[1].split("output.txt")[0]
                 )
-                # Only get path after master_study
-                job = job.split("master_study")[1]
+                # Only get path after studies
+                job = job.split("studies")[1]
                 l_jobs.append(job)
 
             elif first_line:
@@ -535,7 +534,7 @@ def submit_jobs_generation(root, generation=1):
     # Submit all the pending jobs of a given generation
     config_generation = root.parameters["generations"][f"{generation}"]
     cluster_submission = ClusterSubmission(config_generation, root.get_abs_path())
-    path_file = f"submission_files/{dic_int_to_str[generation]}_generation.sub"
+    path_file = f"../submission_files/{dic_int_to_str[generation]}_generation.sub"
     l_filenames, l_path_jobs = cluster_submission.write_sub_files(
         root.generation(generation), path_file
     )
@@ -544,7 +543,7 @@ def submit_jobs_generation(root, generation=1):
 
 def submit_jobs(study_name, print_uncompleted_jobs=False):
     # Add suffix to the root node path to handle scans that are not in the root directory
-    fix = f"../scans/{study_name}"
+    fix = f"/../scans/{study_name}"
     root = tree_maker.tree_from_json(f"{fix[1:]}/tree_maker.json")
     root.add_suffix(suffix=fix)
 
@@ -589,7 +588,7 @@ def submit_jobs(study_name, print_uncompleted_jobs=False):
 # Load the tree from a yaml and submit the jobs that haven't been completed yet
 if __name__ == "__main__":
     # Define study
-    study_name = "example_tunescan"
+    study_name ="tune_scan_end_of_collapse_flat"
 
     # Submit jobs
     submit_jobs(study_name)

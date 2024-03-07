@@ -30,15 +30,15 @@ from tree_maker import initialize
 d_config_particles = {}
 
 # Radius of the initial particle distribution
-d_config_particles["r_min"] = 2
-d_config_particles["r_max"] = 10
+d_config_particles["r_min"] = 4
+d_config_particles["r_max"] = 8
 d_config_particles["n_r"] = 2 * 16 * (d_config_particles["r_max"] - d_config_particles["r_min"])
 
 # Number of angles for the initial particle distribution
 d_config_particles["n_angles"] = 5
 
 # Number of split for parallelization
-d_config_particles["n_split"] = 5
+d_config_particles["n_split"] = 1
 
 # ==================================================================================================
 # --- Optics collider parameters (generation 1)
@@ -56,8 +56,8 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 # Optic file path (version, and round or flat)
 
 ### For v1.6 optics
-d_config_mad["links"]["acc-models-lhc"] = "../../../../../external_dependencies/acc-models-lhc"
-d_config_mad["optics_file"] = "acc-models-lhc/strengths/ramp/opt_ramp_500_1500_thin.madx"
+d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc"
+d_config_mad["optics_file"] = "../../../../external_dependencies/additional_optics/opt_collapse_flathv_900_1800_1500_thin.madx"
 d_config_mad["ver_hllhc_optics"] = 1.6
 
 
@@ -115,16 +115,19 @@ d_config_knobs["on_crab1"] = 0
 d_config_knobs["on_crab5"] = 0
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = 60.0
-d_config_knobs["i_oct_b2"] = 60.0
+d_config_knobs["i_oct_b1"] = -150
+d_config_knobs["i_oct_b2"] = -150
+
+# Dispersion correction
+d_config_knobs["on_disp"] = 0
 
 ### leveling configuration
 
 # Leveling in IP 1/5
-d_config_leveling_ip1_5 = {"constraints": {}}
-d_config_leveling_ip1_5["luminosity"] = 2.0e34  # type: ignore
-d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
-d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
+d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": True}
+# d_config_leveling_ip1_5["luminosity"] = 2.0e34  # type: ignore
+# d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
+# d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
 
 
 # Define dictionary for the leveling settings
@@ -146,15 +149,15 @@ d_config_leveling["ip8"]["luminosity"] = 2.0e33
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 1.4e11  # type: ignore
-d_config_beambeam["nemitt_x"] = 2.5e-6  # type: ignore
-d_config_beambeam["nemitt_y"] = 2.5e-6  # type: ignore
+d_config_beambeam["num_particles_per_bunch"] = 2.2e11  # type: ignore
+d_config_beambeam["nemitt_x"] = 2.3e-6  # type: ignore
+d_config_beambeam["nemitt_y"] = 2.3e-6  # type: ignore
 
 # Filling scheme (in json format)
 # The scheme should consist of a json file containing two lists of booleans (one for each beam),
 # representing each bucket of the LHC.
 filling_scheme_path = os.path.abspath(
-    "../filling_scheme/8b4e_1972b_1960_1178_1886_224bpi_12inj_800ns_bs200ns.json"
+    "../filling_schemes/25ns_2760b_2748_2492_2574_288bpi_13inj_800ns_bs200ns.json"
 )
 
 # Alternatively, one can get a fill directly from LPC from, e.g.:
@@ -270,8 +273,8 @@ d_config_simulation["beam"] = "lhcb1"
 # Below, the user chooses if the gen 2 collider must be dumped, along with the corresponding
 # configuration.
 # ==================================================================================================
-dump_collider = False
-dump_config_in_collider = False
+dump_collider = True
+dump_config_in_collider = True
 
 # ==================================================================================================
 # --- Machine parameters being scanned (generation 2)
@@ -280,13 +283,13 @@ dump_config_in_collider = False
 # optimal DA (e.g. tune, chroma, etc).
 # ==================================================================================================
 # Scan tune with step of 0.001 (need to round to correct for numpy numerical instabilities)
-array_qx = np.round(np.arange(62.305, 62.330, 0.001), decimals=4)[:5]
-array_qy = np.round(np.arange(60.305, 60.330, 0.001), decimals=4)[:5]
+array_qx = np.round(np.arange(62.305, 62.330, 0.001), decimals=4)[:1]
+array_qy = np.round(np.arange(60.305, 60.330, 0.001), decimals=4)[:1]
 
 # In case one is doing a tune-tune scan, to decrease the size of the scan, we can ignore the
 # working points too close to resonance. Otherwise just delete this variable in the loop at the end
 # of the script
-keep = "upper_triangle"  # 'lower_triangle', 'all'
+keep = 'all' # "upper_triangle"  # 'lower_triangle', 'all'
 # ==================================================================================================
 # --- Make tree for the simulations (generation 1)
 #
@@ -354,7 +357,7 @@ config = yaml.safe_load(open("config.yaml"))
 config["root"]["children"] = children
 
 # Set miniconda environment path in the config
-config["root"]["setup_env_script"] = os.getcwd() + "../../source_python.sh"
+config["root"]["setup_env_script"] = os.getcwd() + "/../../source_python.sh"
 
 
 # Recursively define the context for the simulations
@@ -370,7 +373,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "example_tunescan"
+study_name = "tune_scan_end_of_collapse_flat"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):

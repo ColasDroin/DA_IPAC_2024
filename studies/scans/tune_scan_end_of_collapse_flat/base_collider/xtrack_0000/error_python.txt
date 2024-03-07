@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000/2_configure_and_track.py", line 661, in <module>
+    configure_and_track()
+  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000/2_configure_and_track.py", line 606, in configure_and_track
+    tree_maker_tagging(config, tag="started")
+  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000/2_configure_and_track.py", line 42, in tree_maker_tagging
+    tree_maker.tag_json.tag_it(config["log_file"], tag)
+  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/tree_maker/tag_json.py", line 102, in tag_it
+    append_json({mycomment: int(1e9*my_now.timestamp())}, myfile)
+  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/tree_maker/tag_json.py", line 61, in append_json
+    write_json(data, myfile)
+  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/tree_maker/tag_json.py", line 40, in write_json
+    with open(myfile, 'w') as file:
+FileNotFoundError: [Errno 2] No such file or directory: '/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000//afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000//afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000/tree_maker.log'

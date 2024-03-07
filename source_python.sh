@@ -1,9 +1,6 @@
-# Get current directory
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+#!/bin/bash
 
-# Get python environment directory from poetry, or from local environment created by poetry if not possible
-{ 
-    poetry shell &&
-} || { # Replace with you own python dir
-    source $SCRIPT_DIR/.venv/bin/activate
-}
+# Get current directory and source python
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+source $SCRIPT_DIR/.venv/bin/activate
+

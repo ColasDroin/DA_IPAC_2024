@@ -3,23 +3,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Scans
-master_study/scans/*
-!master_study/scans/.gitkeep
-
-# Analysis
-master_study/analysis/*
-!master_study/analysis/.gitkeep
-
-# Other make_folder studies
-master_study/001_make_folders_*
 
 # Submission files
-master_study/submission_files/*
-!master_study/submission_files/.gitkeep
+studies/submission_files/*
+!studies/submission_files/.gitkeep
 
-# Old analysis
-master_study/old/*
+# Heavy file
+*.json
+*.parquet
 
 # AFS files
 .__afs*
