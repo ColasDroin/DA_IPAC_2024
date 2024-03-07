@@ -1,102 +1,0 @@
-Loading line from dict:   0%|          | 0/43150 [00:00<?, ?it/s]Loading line from dict:   4%|▍         | 1892/43150 [00:00<00:02, 18914.61it/s]Loading line from dict:   9%|▉         | 3806/43150 [00:00<00:02, 19046.17it/s]Loading line from dict:  14%|█▍        | 5970/43150 [00:00<00:01, 20229.70it/s]Loading line from dict:  19%|█▊        | 8034/43150 [00:00<00:01, 20384.56it/s]Loading line from dict:  23%|██▎       | 10093/43150 [00:00<00:01, 20457.38it/s]Loading line from dict:  28%|██▊       | 12139/43150 [00:00<00:01, 20026.07it/s]Loading line from dict:  33%|███▎      | 14144/43150 [00:00<00:01, 19841.32it/s]Loading line from dict:  37%|███▋      | 16133/43150 [00:00<00:01, 19855.94it/s]Loading line from dict:  42%|████▏     | 18120/43150 [00:00<00:01, 19758.02it/s]Loading line from dict:  47%|████▋     | 20097/43150 [00:01<00:01, 19636.73it/s]Loading line from dict:  51%|█████     | 22062/43150 [00:01<00:01, 13050.38it/s]Loading line from dict:  56%|█████▌    | 24102/43150 [00:01<00:01, 14685.70it/s]Loading line from dict:  61%|██████    | 26131/43150 [00:01<00:01, 16037.24it/s]Loading line from dict:  65%|██████▌   | 28058/43150 [00:01<00:00, 16866.09it/s]Loading line from dict:  69%|██████▉   | 29986/43150 [00:01<00:00, 17505.83it/s]Loading line from dict:  74%|███████▍  | 31946/43150 [00:01<00:00, 18085.25it/s]Loading line from dict:  79%|███████▊  | 33943/43150 [00:01<00:00, 18616.71it/s]Loading line from dict:  83%|████████▎ | 35997/43150 [00:01<00:00, 19170.17it/s]Loading line from dict:  88%|████████▊ | 38000/43150 [00:02<00:00, 19419.96it/s]Loading line from dict:  93%|█████████▎| 39977/43150 [00:02<00:00, 19480.67it/s]Loading line from dict:  97%|█████████▋| 41950/43150 [00:02<00:00, 19415.43it/s]Loading line from dict: 100%|██████████| 43150/43150 [00:02<00:00, 18406.14it/s]
-Loading line from dict:   0%|          | 0/43202 [00:00<?, ?it/s]Loading line from dict:   5%|▍         | 1946/43202 [00:00<00:02, 19447.82it/s]Loading line from dict:   9%|▉         | 3891/43202 [00:00<00:02, 19356.95it/s]Loading line from dict:  14%|█▎        | 5844/43202 [00:00<00:01, 19423.68it/s]Loading line from dict:  18%|█▊        | 7804/43202 [00:00<00:01, 19488.21it/s]Loading line from dict:  23%|██▎       | 9753/43202 [00:00<00:01, 19424.29it/s]Loading line from dict:  27%|██▋       | 11696/43202 [00:00<00:01, 19274.05it/s]Loading line from dict:  32%|███▏      | 13683/43202 [00:00<00:01, 19460.50it/s]Loading line from dict:  36%|███▌      | 15630/43202 [00:00<00:01, 19439.34it/s]Loading line from dict:  41%|████      | 17594/43202 [00:00<00:01, 19500.33it/s]Loading line from dict:  45%|████▌     | 19654/43202 [00:01<00:01, 19837.63it/s]Loading line from dict:  50%|█████     | 21730/43202 [00:01<00:01, 20118.85it/s]Loading line from dict:  55%|█████▌    | 23875/43202 [00:01<00:00, 20517.76it/s]Loading line from dict:  60%|██████    | 25927/43202 [00:01<00:00, 20166.74it/s]Loading line from dict:  65%|██████▍   | 27954/43202 [00:01<00:00, 20197.23it/s]Loading line from dict:  69%|██████▉   | 29975/43202 [00:01<00:00, 19956.51it/s]Loading line from dict:  74%|███████▍  | 31972/43202 [00:01<00:00, 19825.17it/s]Loading line from dict:  79%|███████▊  | 33956/43202 [00:01<00:00, 19657.16it/s]Loading line from dict:  83%|████████▎ | 35923/43202 [00:01<00:00, 19573.41it/s]Loading line from dict:  88%|████████▊ | 37881/43202 [00:02<00:00, 10639.81it/s]Loading line from dict:  93%|█████████▎| 39985/43202 [00:02<00:00, 12582.60it/s]Loading line from dict:  97%|█████████▋| 41901/43202 [00:02<00:00, 13966.48it/s]Loading line from dict: 100%|██████████| 43202/43202 [00:02<00:00, 17482.47it/s]
-Loading line from dict:   0%|          | 0/43150 [00:00<?, ?it/s]Loading line from dict:   5%|▍         | 1962/43150 [00:00<00:02, 19590.78it/s]Loading line from dict:   9%|▉         | 3922/43150 [00:00<00:02, 19575.52it/s]Loading line from dict:  14%|█▍        | 6112/43150 [00:00<00:01, 20620.48it/s]Loading line from dict:  19%|█▉        | 8175/43150 [00:00<00:01, 20597.05it/s]Loading line from dict:  24%|██▎       | 10235/43150 [00:00<00:01, 20503.25it/s]Loading line from dict:  28%|██▊       | 12286/43150 [00:00<00:01, 20113.77it/s]Loading line from dict:  33%|███▎      | 14299/43150 [00:00<00:01, 19908.63it/s]Loading line from dict:  38%|███▊      | 16320/43150 [00:00<00:01, 19992.55it/s]Loading line from dict:  42%|████▏     | 18321/43150 [00:00<00:01, 19836.63it/s]Loading line from dict:  47%|████▋     | 20306/43150 [00:01<00:01, 19685.28it/s]Loading line from dict:  52%|█████▏    | 22436/43150 [00:01<00:01, 20167.03it/s]Loading line from dict:  57%|█████▋    | 24486/43150 [00:01<00:00, 20265.07it/s]Loading line from dict:  61%|██████▏   | 26514/43150 [00:01<00:00, 20104.43it/s]Loading line from dict:  66%|██████▌   | 28526/43150 [00:01<00:00, 19953.87it/s]Loading line from dict:  71%|███████   | 30523/43150 [00:01<00:01, 9448.76it/s] Loading line from dict:  75%|███████▌  | 32411/43150 [00:01<00:00, 11024.93it/s]Loading line from dict:  80%|███████▉  | 34455/43150 [00:02<00:00, 12840.05it/s]Loading line from dict:  85%|████████▍ | 36498/43150 [00:02<00:00, 14480.05it/s]Loading line from dict:  89%|████████▉ | 38489/43150 [00:02<00:00, 15754.99it/s]Loading line from dict:  94%|█████████▎| 40411/43150 [00:02<00:00, 16607.45it/s]Loading line from dict:  98%|█████████▊| 42331/43150 [00:02<00:00, 17292.15it/s]Loading line from dict: 100%|██████████| 43150/43150 [00:02<00:00, 17001.62it/s]
-Loading line from dict:   0%|          | 0/43202 [00:00<?, ?it/s]Loading line from dict:   5%|▍         | 1946/43202 [00:00<00:02, 19430.37it/s]Loading line from dict:   9%|▉         | 3890/43202 [00:00<00:02, 19401.70it/s]Loading line from dict:  14%|█▎        | 5859/43202 [00:00<00:01, 19531.44it/s]Loading line from dict:  18%|█▊        | 7820/43202 [00:00<00:01, 19554.16it/s]Loading line from dict:  23%|██▎       | 9776/43202 [00:00<00:01, 19471.46it/s]Loading line from dict:  27%|██▋       | 11724/43202 [00:00<00:01, 19257.20it/s]Loading line from dict:  32%|███▏      | 13697/43202 [00:00<00:01, 19404.60it/s]Loading line from dict:  36%|███▌      | 15638/43202 [00:00<00:01, 19357.91it/s]Loading line from dict:  41%|████      | 17589/43202 [00:00<00:01, 19395.76it/s]Loading line from dict:  45%|████▌     | 19619/43202 [00:01<00:01, 19664.69it/s]Loading line from dict:  50%|█████     | 21685/43202 [00:01<00:01, 19966.66it/s]Loading line from dict:  55%|█████▌    | 23789/43202 [00:01<00:00, 20285.26it/s]Loading line from dict:  60%|█████▉    | 25818/43202 [00:01<00:00, 19984.29it/s]Loading line from dict:  64%|██████▍   | 27819/43202 [00:01<00:00, 19991.16it/s]Loading line from dict:  69%|██████▉   | 29819/43202 [00:01<00:00, 19797.76it/s]Loading line from dict:  74%|███████▎  | 31800/43202 [00:01<00:00, 19684.10it/s]Loading line from dict:  78%|███████▊  | 33769/43202 [00:01<00:00, 19579.29it/s]Loading line from dict:  83%|████████▎ | 35728/43202 [00:02<00:00, 8150.96it/s] Loading line from dict:  87%|████████▋ | 37639/43202 [00:02<00:00, 9792.56it/s]Loading line from dict:  92%|█████████▏| 39719/43202 [00:02<00:00, 11731.03it/s]Loading line from dict:  96%|█████████▋| 41639/43202 [00:02<00:00, 13229.37it/s]Loading line from dict: 100%|██████████| 43202/43202 [00:02<00:00, 16172.24it/s]
-3e96fb617932406bb818563d2ecb17f8.c:5366: warning: "_GNU_SOURCE" redefined
- #  define _GNU_SOURCE // enable GNU libc NAN extension if possible
- 
-In file included from 3e96fb617932406bb818563d2ecb17f8.c:50:
-/home/cdroin/miniforge/include/python3.10/pyconfig.h:1621: note: this is the location of the previous definition
- #define _GNU_SOURCE 1
- 
-3e96fb617932406bb818563d2ecb17f8.c: In function ‘compt_do’:
-3e96fb617932406bb818563d2ecb17f8.c:18105:12: warning: unused variable ‘e_loss_primary_tot’ [-Wunused-variable]
-     double e_loss_primary_tot = 0.0;  // [GeV] total energy lost by the macroparticle
-            ^~~~~~~~~~~~~~~~~~
-3e96fb617932406bb818563d2ecb17f8.c:18102:62: warning: variable ‘ps_e_prime’ set but not used [-Wunused-but-set-variable]
-     double e_e_prime, px_e_prime, py_e_prime, pzeta_e_prime, ps_e_prime, pt_e_prime;  // [GeV, 1, 1, 1, 1, 1] scattered primary
-                                                              ^~~~~~~~~~
-3e96fb617932406bb818563d2ecb17f8.c: In function ‘synchrobeam_kick’:
-3e96fb617932406bb818563d2ecb17f8.c:18358:21: warning: variable ‘lumi_table_index’ set but not used [-Wunused-but-set-variable]
-         RecordIndex lumi_table_index               = NULL;
-                     ^~~~~~~~~~~~~~~~
-3e96fb617932406bb818563d2ecb17f8.c:18269:18: warning: unused variable ‘pzeta_slice_star’ [-Wunused-variable]
-     const double pzeta_slice_star = BeamBeamBiGaussian3DData_get_slices_other_beam_pzeta_center_star(el, i_slice);
-                  ^~~~~~~~~~~~~~~~
-Error in sys.excepthook:
-Traceback (most recent call last):
-  File "/home/cdroin/miniforge/lib/python3.10/linecache.py", line 46, in getlines
-    return updatecache(filename, module_globals)
-  File "/home/cdroin/miniforge/lib/python3.10/linecache.py", line 136, in updatecache
-    with tokenize.open(fullname) as fp:
-  File "/home/cdroin/miniforge/lib/python3.10/tokenize.py", line 396, in open
-    encoding, lines = detect_encoding(buffer.readline)
-  File "/home/cdroin/miniforge/lib/python3.10/tokenize.py", line 365, in detect_encoding
-    first = read_or_stop()
-  File "/home/cdroin/miniforge/lib/python3.10/tokenize.py", line 323, in read_or_stop
-    return readline()
-KeyboardInterrupt
-
-Original exception was:
-Traceback (most recent call last):
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000/2_configure_and_track.py", line 661, in <module>
-    configure_and_track()
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000/2_configure_and_track.py", line 609, in configure_and_track
-    collider, config_sim, config_bb = configure_collider(
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/studies/scans/tune_scan_end_of_collapse_flat/base_collider/xtrack_0000/2_configure_and_track.py", line 450, in configure_collider
-    collider.build_trackers()  # (_context=context)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/xtrack/multiline/multiline.py", line 203, in build_trackers
-    ll.build_tracker(_context=_context, _buffer=_buffer, **kwargs)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/xtrack/line.py", line 782, in build_tracker
-    self.tracker = xt.Tracker(
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/xtrack/tracker.py", line 141, in __init__
-    _ = self.get_track_kernel_and_data_for_present_config()  # This triggers compilation
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/xtrack/tracker.py", line 1367, in get_track_kernel_and_data_for_present_config
-    new_kernel = self._build_kernel(compile=True)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/xtrack/tracker.py", line 630, in _build_kernel
-    out_kernels = context.build_kernels(
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/xobjects/context_cpu.py", line 311, in build_kernels
-    so_file = self.compile_kernel(
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/xobjects/context_cpu.py", line 437, in compile_kernel
-    output_file = ffi_interface.compile(
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/cffi/api.py", line 725, in compile
-    return recompile(self, module_name, source, tmpdir=tmpdir,
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/cffi/recompiler.py", line 1564, in recompile
-    outputfilename = ffiplatform.compile('.', ext,
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/cffi/ffiplatform.py", line 20, in compile
-    outputfilename = _build(tmpdir, ext, compiler_verbose, debug)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/cffi/ffiplatform.py", line 48, in _build
-    dist.run_command('build_ext')
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/dist.py", line 963, in run_command
-    super().run_command(command)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 988, in run_command
-    cmd_obj.run()
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/command/build_ext.py", line 89, in run
-    _build_ext.run(self)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py", line 345, in run
-    self.build_extensions()
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py", line 467, in build_extensions
-    self._build_extensions_serial()
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py", line 493, in _build_extensions_serial
-    self.build_extension(ext)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/command/build_ext.py", line 250, in build_extension
-    _build_ext.build_extension(self, ext)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/Cython/Distutils/build_ext.py", line 135, in build_extension
-    super(build_ext, self).build_extension(ext)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py", line 548, in build_extension
-    objects = self.compiler.compile(
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/ccompiler.py", line 600, in compile
-    self._compile(obj, src, ext, cc_args, extra_postargs, pp_opts)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/unixccompiler.py", line 185, in _compile
-    self.spawn(compiler_so + cc_args + [src, '-o', obj] + extra_postargs)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/ccompiler.py", line 1041, in spawn
-    spawn(cmd, dry_run=self.dry_run, **kwargs)
-  File "/afs/cern.ch/work/c/cdroin/private/DA_IPAC_2024/.venv/lib/python3.10/site-packages/setuptools/_distutils/spawn.py", line 58, in spawn
-    proc.wait()
-  File "/home/cdroin/miniforge/lib/python3.10/subprocess.py", line 1209, in wait
-    return self._wait(timeout=timeout)
-  File "/home/cdroin/miniforge/lib/python3.10/subprocess.py", line 1959, in _wait
-    (pid, sts) = self._try_wait(0)
-  File "/home/cdroin/miniforge/lib/python3.10/subprocess.py", line 1917, in _try_wait
-    (pid, sts) = os.waitpid(self.pid, wait_flags)
-KeyboardInterrupt

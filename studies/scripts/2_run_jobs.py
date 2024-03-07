@@ -159,7 +159,6 @@ class ClusterSubmission:
             # Update (write on disk) dic_id_to_job
             self.dic_id_to_job = dic_id_to_job
 
-
     def _get_state_jobs(self, dic_id_to_job=None, verbose=True):
         if dic_id_to_job is None:
             dic_id_to_job = self.dic_id_to_job
@@ -588,7 +587,7 @@ def submit_jobs(study_name, print_uncompleted_jobs=False):
 # Load the tree from a yaml and submit the jobs that haven't been completed yet
 if __name__ == "__main__":
     # Define study
-    study_name ="tune_scan_end_of_collapse_flat"
+    study_name = "tune_scan_end_of_collapse_flat"
 
     # Submit jobs
     submit_jobs(study_name)

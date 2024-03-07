@@ -13,6 +13,6 @@
       job_executable: 2_configure_and_track.py
       files_to_clone:
         - misc.py
-      run_on: "local_pc"
+      run_on: "htc"
       context: "cpu"
-      htc_job_flavor: "microcentury"
+      htc_job_flavor: "tomorrow"

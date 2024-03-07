@@ -8,12 +8,18 @@ __pycache__/
 studies/submission_files/*
 !studies/submission_files/.gitkeep
 
+# Scans
+studies/scans/*
+
 # Heavy file
 *.json
 *.parquet
 
 # AFS files
 .__afs*
+
+# Python virtual environment
+.venv/
 
 #vscode config
 .vscode/
