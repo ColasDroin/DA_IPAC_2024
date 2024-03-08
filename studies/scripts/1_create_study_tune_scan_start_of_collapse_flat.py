@@ -88,8 +88,8 @@ d_config_tune_and_chroma = {
     "dqy": {},
 }
 for beam in ["lhcb1", "lhcb2"]:
-    d_config_tune_and_chroma["qx"][beam] = np.nan # ! scanned
-    d_config_tune_and_chroma["qy"][beam] = np.nan # ! scanned
+    d_config_tune_and_chroma["qx"][beam] = np.nan  # ! scanned
+    d_config_tune_and_chroma["qy"][beam] = np.nan  # ! scanned
     d_config_tune_and_chroma["dqx"][beam] = 15.0
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
@@ -104,11 +104,11 @@ d_config_knobs = {}
 
 # Knobs at IPs
 d_config_knobs["on_x1"] = 250
-d_config_knobs["on_sep1"] = # ! What should be the separation at IP1?
+d_config_knobs["on_sep1"] = -2
 d_config_knobs["on_x2"] = -170
 d_config_knobs["on_sep2"] = 0.138
 d_config_knobs["on_x5"] = 250
-d_config_knobs["on_sep5"] = # ! What should be the separation at IP5?
+d_config_knobs["on_sep5"] = 2
 d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
 
