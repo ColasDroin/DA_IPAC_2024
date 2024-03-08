@@ -19,7 +19,13 @@ cpymad = "^1.15.0"
 xsuite = "^0.6.0"
 tree-maker = {git = "ssh://git@github.com/xsuite/tree_maker.git"}
 xmask = {path = "external_dependencies/xmask", develop = true}
+ipykernel = "^6.29.3"
+seaborn = "^0.13.2"
+qrcode = "^7.4.2"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.3"
 
 [build-system]
 requires = ["poetry-core"]
