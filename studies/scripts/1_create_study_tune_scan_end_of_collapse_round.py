@@ -88,8 +88,8 @@ d_config_tune_and_chroma = {
     "dqy": {},
 }
 for beam in ["lhcb1", "lhcb2"]:
-    d_config_tune_and_chroma["qx"][beam] = 62.31
-    d_config_tune_and_chroma["qy"][beam] = 60.32
+    d_config_tune_and_chroma["qx"][beam] = np.nan  # ! scanned
+    d_config_tune_and_chroma["qy"][beam] = np.nan  # ! scanned
     d_config_tune_and_chroma["dqx"][beam] = 15.0
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
@@ -375,7 +375,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "tune_scan_end_of_collapse_flat"
+study_name = "tune_scan_end_of_collapse_round"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):

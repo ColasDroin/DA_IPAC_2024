@@ -1,3 +1,5 @@
+#
+# ! To work, this closed-orbit configuration correction must not be used
 # ==================================================================================================
 # --- Imports
 # ==================================================================================================
@@ -5,18 +7,18 @@ import copy
 import itertools
 import json
 import os
+import shutil
 import time
 
 import numpy as np
 import yaml
-from create_study_functions.compute_bunch_schedule import (
-    get_worst_bunch,
-)
-from create_study_functions.generate_run_file import (
+from tree_maker import initialize
+from user_defined_functions import (
     generate_run_sh,
     generate_run_sh_htc,
+    get_worst_bunch,
+    reformat_filling_scheme_from_lpc_alt,
 )
-from tree_maker import initialize
 
 # ==================================================================================================
 # --- Initial particle distribution parameters (generation 1)
@@ -30,8 +32,8 @@ from tree_maker import initialize
 d_config_particles = {}
 
 # Radius of the initial particle distribution
-d_config_particles["r_min"] = 4
-d_config_particles["r_max"] = 8
+d_config_particles["r_min"] = 2
+d_config_particles["r_max"] = 10
 d_config_particles["n_r"] = 2 * 16 * (d_config_particles["r_max"] - d_config_particles["r_min"])
 
 # Number of angles for the initial particle distribution
@@ -40,6 +42,8 @@ d_config_particles["n_angles"] = 5
 # Number of split for parallelization
 d_config_particles["n_split"] = 5
 
+# Sanity checks
+sanity_checks = False
 # ==================================================================================================
 # --- Optics collider parameters (generation 1)
 #
@@ -56,9 +60,9 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 # Optic file path (version, and round or flat)
 
 ### For v1.6 optics
-d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc"
+d_config_mad["links"]["acc-models-lhc"] = "../../../../modules/hllhc16"
 d_config_mad["optics_file"] = (
-    "../../../../external_dependencies/additional_optics/opt_collapse_1100_1500_thin.madx"
+    "acc-models-lhc/strengths/round/opt_round_150_1500_optphases_thin.madx"
 )
 d_config_mad["ver_hllhc_optics"] = 1.6
 
@@ -88,14 +92,14 @@ d_config_tune_and_chroma = {
     "dqy": {},
 }
 for beam in ["lhcb1", "lhcb2"]:
-    d_config_tune_and_chroma["qx"][beam] = np.nan # ! scanned
-    d_config_tune_and_chroma["qy"][beam] = np.nan # ! scanned
+    d_config_tune_and_chroma["qx"][beam] = 62.31
+    d_config_tune_and_chroma["qy"][beam] = 60.32
     d_config_tune_and_chroma["dqx"][beam] = 15.0
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
 # Value to be added to linear coupling knobs
-d_config_tune_and_chroma["delta_cmr"] = 0.001  # type: ignore
-d_config_tune_and_chroma["delta_cmi"] = 0.0  # type: ignore
+d_config_tune_and_chroma["delta_cmr"] = 0.001
+d_config_tune_and_chroma["delta_cmi"] = 0.0
 
 ### Knobs configuration
 
@@ -104,32 +108,30 @@ d_config_knobs = {}
 
 # Knobs at IPs
 d_config_knobs["on_x1"] = 250
-d_config_knobs["on_sep1"] = # ! What should be the separation at IP1?
+d_config_knobs["on_sep1"] = 0
 d_config_knobs["on_x2"] = -170
 d_config_knobs["on_sep2"] = 0.138
 d_config_knobs["on_x5"] = 250
-d_config_knobs["on_sep5"] = # ! And at IP5?
+d_config_knobs["on_sep5"] = 0
 d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
 
 # Crab cavities
-d_config_knobs["on_crab1"] = 0
-d_config_knobs["on_crab5"] = 0
+d_config_knobs["on_crab1"] = -190
+d_config_knobs["on_crab5"] = -190
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = -300.0
-d_config_knobs["i_oct_b2"] = -300.0
-
-# Dispersion correction
-d_config_knobs["on_disp"] = 0
+d_config_knobs["i_oct_b1"] = 60.0
+d_config_knobs["i_oct_b2"] = 60.0
+d_config_knobs["on_disp"] = 1
 
 ### leveling configuration
 
 # Leveling in IP 1/5
-d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": True}
-# d_config_leveling_ip1_5["luminosity"] = 2.0e34  # type: ignore
-# d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
-# d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
+d_config_leveling_ip1_5 = {"constraints": {}}
+d_config_leveling_ip1_5["luminosity"] = 5e34
+d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
+d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
 
 
 # Define dictionary for the leveling settings
@@ -151,15 +153,15 @@ d_config_leveling["ip8"]["luminosity"] = 2.0e33
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 2.2e11  # type: ignore
-d_config_beambeam["nemitt_x"] = 2.3e-6  # type: ignore
-d_config_beambeam["nemitt_y"] = 2.3e-6  # type: ignore
+d_config_beambeam["num_particles_per_bunch"] = 1.4e11
+d_config_beambeam["nemitt_x"] = 2.3e-6
+d_config_beambeam["nemitt_y"] = 2.3e-6
 
 # Filling scheme (in json format)
 # The scheme should consist of a json file containing two lists of booleans (one for each beam),
 # representing each bucket of the LHC.
 filling_scheme_path = os.path.abspath(
-    "../filling_schemes/25ns_2760b_2748_2492_2574_288bpi_13inj_800ns_bs200ns.json"
+    "master_jobs/filling_scheme/25ns_2452b_2440_1952_2240_248bpi_12inj_mixed.json"
 )
 
 # Alternatively, one can get a fill directly from LPC from, e.g.:
@@ -175,15 +177,15 @@ filling_scheme_path = os.path.abspath(
 if filling_scheme_path.endswith(".json"):
     with open(filling_scheme_path, "r") as fid:
         d_filling_scheme = json.load(fid)
-else:
-    raise ValueError("Only json filling schemes are supported")
 
 # If the filling scheme is already in the correct format, do nothing
-if "beam1" not in d_filling_scheme.keys() or "beam2" not in d_filling_scheme.keys():
-    raise ValueError(
-        "The filling scheme must contain two arrays of booleans, one for each beam, representing"
-        " the trains of bunches"
-    )
+if "beam1" in d_filling_scheme.keys() and "beam2" in d_filling_scheme.keys():
+    pass
+# Otherwise, we need to reformat the file
+else:
+    # One can potentially use b1_array, b2_array to scan the bunches later
+    b1_array, b2_array = reformat_filling_scheme_from_lpc_alt(filling_scheme_path)
+    filling_scheme_path = filling_scheme_path.replace(".json", "_converted.json")
 
 
 # Add to config file
@@ -191,16 +193,14 @@ d_config_beambeam["mask_with_filling_pattern"]["pattern_fname"] = (
     filling_scheme_path  # If None, a full fill is assumed
 )
 
-# Initialize bunch number to None (will be set later)
-d_config_beambeam["mask_with_filling_pattern"]["i_bunch_b1"] = None
-d_config_beambeam["mask_with_filling_pattern"]["i_bunch_b2"] = None
-
 # Set this variable to False if you intend to scan the bunch number (but ensure both bunches indices
 # are defined later)
+d_config_beambeam["mask_with_filling_pattern"]["i_bunch_b1"] = None
+d_config_beambeam["mask_with_filling_pattern"]["i_bunch_b2"] = None
 check_bunch_number = True
 if check_bunch_number:
-    # Bunch number is ignored if pattern_fname is None (in which case the simulation considers all
-    # bunch elements). It must be specified otherwise)
+    # Bunch number (ignored if pattern_fname is None (in which case the simulation considers all bunch
+    # elements), must be specified otherwise)
     # If the bunch number is None and pattern_name is defined, the bunch with the largest number of
     # long-range interactions will be used
     if d_config_beambeam["mask_with_filling_pattern"]["i_bunch_b1"] is None:
@@ -291,7 +291,7 @@ array_qy = np.round(np.arange(60.305, 60.330, 0.001), decimals=4)
 # In case one is doing a tune-tune scan, to decrease the size of the scan, we can ignore the
 # working points too close to resonance. Otherwise just delete this variable in the loop at the end
 # of the script
-keep = "upper_triangle"  # "upper_triangle"  # 'lower_triangle', 'all'
+keep = "upper_triangle"  # 'lower_triangle', 'all'
 # ==================================================================================================
 # --- Make tree for the simulations (generation 1)
 #
@@ -309,6 +309,8 @@ children["base_collider"]["config_particles"] = d_config_particles
 # Add base machine parameters to the first generation
 children["base_collider"]["config_mad"] = d_config_mad
 
+# Sanity checks
+children["base_collider"]["sanity_checks"] = sanity_checks
 
 # ==================================================================================================
 # --- Complete tree for the simulations (generation 2)
@@ -338,7 +340,7 @@ for idx_job, (track, qx, qy) in enumerate(itertools.product(track_array, array_q
 
     # Complete the dictionnary for the tracking
     d_config_simulation["particle_file"] = f"../particles/{track:02}.parquet"
-    d_config_simulation["collider_file"] = "../collider/collider.json"
+    d_config_simulation["collider_file"] = f"../collider/collider.json"
 
     # Add a child to the second generation, with all the parameters for the collider and tracking
     children["base_collider"]["children"][f"xtrack_{idx_job:04}"] = {
@@ -359,30 +361,21 @@ config = yaml.safe_load(open("config.yaml"))
 config["root"]["children"] = children
 
 # Set miniconda environment path in the config
-config["root"]["setup_env_script"] = os.getcwd() + "/../../source_python.sh"
+config["root"]["setup_env_script"] = os.getcwd() + "/../activate_miniforge.sh"
 
-
-# Recursively define the context for the simulations
-def set_context(children, idx_gen, config):
-    for child in children.values():
-        child["context"] = config["root"]["generations"][idx_gen]["context"]
-        if "children" in child.keys():
-            set_context(child["children"], idx_gen + 1, config)
-
-
-set_context(children, 1, config)
 # ==================================================================================================
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "tune_scan_start_of_collapse_round"
+study_name = "opt_round_150_1500_optphases_tune_scan"
 
 # Creade folder that will contain the tree
-if not os.path.exists(f"../scans/{study_name}"):
-    os.makedirs(f"../scans/{study_name}")
+if not os.path.exists("scans/" + study_name):
+    os.makedirs("scans/" + study_name)
 
 # Move to the folder that will contain the tree
-os.chdir(f"../scans/{study_name}")
+os.chdir("scans/" + study_name)
+
 
 # Clean the id_job file
 id_job_file_path = "id_job.yaml"
@@ -393,7 +386,7 @@ if os.path.isfile(id_job_file_path):
 start_time = time.time()
 root = initialize(config)
 print("Done with the tree creation.")
-print(f"--- {time.time() - start_time} seconds ---")
+print("--- %s seconds ---" % (time.time() - start_time))
 
 # Check if htcondor is the configuration
 if "htc" in config["root"]["generations"][2]["run_on"]:
@@ -405,4 +398,4 @@ else:
 start_time = time.time()
 root.make_folders(generate_run)
 print("The tree folders are ready.")
-print(f"--- {time.time() - start_time} seconds ---")
+print("--- %s seconds ---" % (time.time() - start_time))
