@@ -375,7 +375,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "tune_scan_end_of_levelling_round"
+study_name = "tune_scan_end_of_levelling"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):
