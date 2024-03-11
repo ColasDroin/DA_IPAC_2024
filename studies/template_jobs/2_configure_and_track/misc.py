@@ -361,12 +361,7 @@ def compute_PU(luminosity, num_colliding_bunches, T_rev0, cross_section=81e-27):
     return luminosity / num_colliding_bunches * cross_section * T_rev0
 
 
-def luminosity_leveling_ip1_5(
-    collider,
-    config_collider,
-    config_bb,
-    crab=False,
-):
+def luminosity_leveling_ip1_5(collider, config_collider, config_bb, crab=False):
     # Get Twiss
     twiss_b1 = collider["lhcb1"].twiss()
     twiss_b2 = collider["lhcb2"].twiss()
@@ -426,6 +421,74 @@ def luminosity_leveling_ip1_5(
         print(
             f"Optimization for leveling in IP 1/5 succeeded with I={res.x:.2e} particles per bunch"
         )
+    return res.x
+
+
+def luminosity_leveling_ip1_5_with_crabs(collider, config_collider, config_bb):
+    # Get revolution period
+    T_rev0 = collider["lhcb1"].twiss()["T_rev0"]
+
+    def compute_lumi(CC):
+        # Set new crab
+        collider.vars["on_crab1"] = CC
+        collider.vars["on_crab5"] = CC
+
+        # Get Twiss as it's updated for each new crab value
+        twiss_b1 = collider["lhcb1"].twiss()
+        twiss_b2 = collider["lhcb2"].twiss()
+
+        luminosity = xt.lumi.luminosity_from_twiss(
+            n_colliding_bunches=config_collider["config_lumi_leveling_ip1_5"][
+                "num_colliding_bunches"
+            ],
+            num_particles_per_bunch=config_bb["num_particles_per_bunch"],
+            ip_name="ip1",
+            nemitt_x=config_bb["nemitt_x"],
+            nemitt_y=config_bb["nemitt_y"],
+            sigma_z=config_bb["sigma_z"],
+            twiss_b1=twiss_b1,
+            twiss_b2=twiss_b2,
+            crab=True,
+        )
+        return luminosity
+
+    def f(CC):
+        luminosity = compute_lumi(CC)
+
+        PU = compute_PU(
+            luminosity,
+            config_collider["config_lumi_leveling_ip1_5"]["num_colliding_bunches"],
+            T_rev0,
+        )
+        penalty_PU = max(
+            0,
+            (PU - config_collider["config_lumi_leveling_ip1_5"]["constraints"]["max_PU"]) * 1e35,
+        )  # in units of 1e-35
+        penalty_excess_lumi = max(
+            0,
+            (luminosity - config_collider["config_lumi_leveling_ip1_5"]["luminosity"]) * 10,
+        )  # in units of 1e-35 if luminosity is in units of 1e34
+
+        return (
+            abs(luminosity - config_collider["config_lumi_leveling_ip1_5"]["luminosity"])
+            + penalty_PU
+            + penalty_excess_lumi
+        )
+
+    # Do the optimization
+    res = minimize_scalar(
+        f,
+        bounds=(
+            float(config_collider["config_lumi_leveling_ip1_5"]["constraints"]["min_cc"]),
+            float(config_collider["config_lumi_leveling_ip1_5"]["constraints"]["max_cc"]),
+        ),
+        method="bounded",
+        options={"xatol": 0.1},
+    )
+    if not res.success:
+        logging.warning("Optimization for leveling in IP 1/5 failed. Please check the constraints.")
+    else:
+        print(f"Optimization for leveling in IP 1/5 succeeded with CC={res.x:.2e} mrad")
     return res.x
 
 

@@ -27,6 +27,7 @@ from misc import (
     generate_orbit_correction_setup,
     luminosity_leveling,
     luminosity_leveling_ip1_5,
+    luminosity_leveling_ip1_5_with_crabs,
 )
 
 # Initialize yaml reader
@@ -204,30 +205,59 @@ def do_levelling(
     # Initial intensity
     initial_I = config_bb["num_particles_per_bunch"]
 
-    # First level luminosity in IP 1/5 changing the intensity
+    # Initial CC
+    initial_CC = config_collider["config_knobs_and_tuning"]["knob_settings"]["on_crab1"]
+
+    # Level ip IP1/5 if requested
     if (
         "config_lumi_leveling_ip1_5" in config_collider
         and not config_collider["config_lumi_leveling_ip1_5"]["skip_leveling"]
     ):
-        print("Leveling luminosity in IP 1/5 varying the intensity")
         # Update the number of bunches in the configuration file
         config_collider["config_lumi_leveling_ip1_5"]["num_colliding_bunches"] = int(
             n_collisions_ip1_and_5
         )
 
-        # Do the levelling
-        try:
-            I = luminosity_leveling_ip1_5(
-                collider,
-                config_collider,
-                config_bb,
-                crab=crab,
-            )
-        except ValueError:
-            print("There was a problem during the luminosity leveling in IP1/5... Ignoring it.")
-            I = config_bb["num_particles_per_bunch"]
+        # Level with crabs if needed
+        if (
+            "level_with_crabs" in config_collider["config_lumi_leveling_ip1_5"]
+            and config_collider["config_lumi_leveling_ip1_5"]["level_with_crabs"]
+        ):
+            print("Leveling luminosity in IP 1/5 varying the CC")
 
-        config_bb["num_particles_per_bunch"] = float(I)
+            # Ensure crabs are considered on
+            if not crab:
+                raise ValueError(
+                    "Crab cavities are not activated, but the configuration file asks to level with them..."
+                )
+
+            # Do the levelling
+            try:
+                CC = luminosity_leveling_ip1_5_with_crabs(collider, config_collider, config_bb)
+            except ValueError:
+                print("There was a problem during the luminosity leveling in IP1/5... Ignoring it.")
+                CC = config_collider["config_knobs_and_tuning"]["knob_settings"]["on_crab1"]
+
+            config_collider["config_knobs_and_tuning"]["knob_settings"]["on_crab1"] = float(CC)
+            config_collider["config_knobs_and_tuning"]["knob_settings"]["on_crab5"] = float(CC)
+
+        # Level luminosity in IP 1/5 changing the intensity (defaults)
+        else:
+            print("Leveling luminosity in IP 1/5 varying the intensity")
+
+            # Do the levelling
+            try:
+                I = luminosity_leveling_ip1_5(
+                    collider,
+                    config_collider,
+                    config_bb,
+                    crab=crab,
+                )
+            except ValueError:
+                print("There was a problem during the luminosity leveling in IP1/5... Ignoring it.")
+                I = config_bb["num_particles_per_bunch"]
+
+            config_bb["num_particles_per_bunch"] = float(I)
 
     # Set up the constraints for lumi optimization in IP8
     additional_targets_lumi = []
@@ -254,6 +284,9 @@ def do_levelling(
 
     # Update configuration
     config_bb["num_particles_per_bunch_before_optimization"] = float(initial_I)
+    config_collider["config_knobs_and_tuning"]["knob_settings"]["CC_before_optimization"] = float(
+        initial_CC
+    )
     config_collider["config_lumi_leveling"]["ip2"]["final_on_sep2h"] = float(
         collider.vars["on_sep2h"]._value
     )
