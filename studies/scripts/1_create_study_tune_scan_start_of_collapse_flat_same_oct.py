@@ -120,7 +120,7 @@ d_config_knobs["on_crab5"] = 0
 d_config_knobs["i_oct_b1"] = -300
 d_config_knobs["i_oct_b2"] = -300
 
-# Dispersion correction
+# Dispersion correction # ! Must be off, otherwise matching of tune and chroma fails
 d_config_knobs["on_disp"] = 1
 
 ### leveling configuration
@@ -375,7 +375,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "tune_scan_start_of_collapse_flat_same_angle_on_disp_on"
+study_name = "tune_scan_start_of_collapse_flat_same_oct"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):

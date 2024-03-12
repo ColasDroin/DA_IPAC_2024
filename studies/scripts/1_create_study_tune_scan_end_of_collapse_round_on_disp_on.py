@@ -120,7 +120,7 @@ d_config_knobs["on_crab5"] = 0
 d_config_knobs["i_oct_b1"] = -300.0
 d_config_knobs["i_oct_b2"] = -300.0
 
-# Dispersion correction
+# Dispersion correction # ! Only collapse optics that works with on_disp... why?
 d_config_knobs["on_disp"] = 1
 
 ### leveling configuration

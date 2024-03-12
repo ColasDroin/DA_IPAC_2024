@@ -138,7 +138,8 @@ def get_title_from_conf(
                     conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_crab1"]
                     is not None
                 ):
-                    crab_cavities = "CC ON. "
+                    CC_value = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_crab1"]
+                    crab_cavities = f"$CC = {{{CC_value:.1f}}}$ $\mu rad$. "
                 else:
                     crab_cavities = "CC OFF. "
             else:
