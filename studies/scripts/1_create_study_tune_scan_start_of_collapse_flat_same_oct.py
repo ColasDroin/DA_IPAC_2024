@@ -121,7 +121,7 @@ d_config_knobs["i_oct_b1"] = -300
 d_config_knobs["i_oct_b2"] = -300
 
 # Dispersion correction # ! Must be off, otherwise matching of tune and chroma fails
-d_config_knobs["on_disp"] = 1
+d_config_knobs["on_disp"] = 0
 
 ### leveling configuration
 
