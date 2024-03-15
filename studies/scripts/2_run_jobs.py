@@ -587,7 +587,7 @@ def submit_jobs(study_name, print_uncompleted_jobs=False):
 # Load the tree from a yaml and submit the jobs that haven't been completed yet
 if __name__ == "__main__":
     # Define study
-    study_name = "tune_scan_start_of_collapse_flat_same_oct"
+    study_name = "collider_end_of_levelling"
 
     # Submit jobs
     submit_jobs(study_name)
