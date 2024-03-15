@@ -88,8 +88,8 @@ d_config_tune_and_chroma = {
     "dqy": {},
 }
 for beam in ["lhcb1", "lhcb2"]:
-    d_config_tune_and_chroma["qx"][beam] = 61.32
-    d_config_tune_and_chroma["qy"][beam] = 62.31
+    d_config_tune_and_chroma["qx"][beam] = 62.31
+    d_config_tune_and_chroma["qy"][beam] = 60.32
     d_config_tune_and_chroma["dqx"][beam] = 15.0
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
