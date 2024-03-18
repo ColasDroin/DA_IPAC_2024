@@ -104,11 +104,11 @@ d_config_knobs = {}
 
 # Knobs at IPs
 d_config_knobs["on_x1"] = 250
-d_config_knobs["on_sep1"] = -2
+d_config_knobs["on_sep1"] = 0
 d_config_knobs["on_x2"] = -170
 d_config_knobs["on_sep2"] = 0.138
 d_config_knobs["on_x5"] = 250
-d_config_knobs["on_sep5"] = 2
+d_config_knobs["on_sep5"] = 0
 d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
 
@@ -117,8 +117,8 @@ d_config_knobs["on_crab1"] = 0
 d_config_knobs["on_crab5"] = 0
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = -300
-d_config_knobs["i_oct_b2"] = -300
+d_config_knobs["i_oct_b1"] = 300
+d_config_knobs["i_oct_b2"] = 300
 
 # Dispersion correction # ! Must be off, otherwise matching of tune and chroma fails
 d_config_knobs["on_disp"] = 0
@@ -375,7 +375,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "tune_scan_start_of_collapse_flat_same_oct"
+study_name = "tune_scan_end_of_collapse_flat_pos_oct"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):

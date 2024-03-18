@@ -58,7 +58,7 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 ### For v1.6 optics
 d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc"
 d_config_mad["optics_file"] = (
-    "../../../../external_dependencies/additional_optics/opt_collapse_1100_1500_thin.madx"
+    "../../../../external_dependencies/additional_optics/opt_collapse_flathv_900_1800_1500_thin.madx"
 )
 d_config_mad["ver_hllhc_optics"] = 1.6
 
@@ -119,8 +119,8 @@ d_config_knobs["on_crab1"] = 0
 d_config_knobs["on_crab5"] = 0
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = -300.0
-d_config_knobs["i_oct_b2"] = -300.0
+d_config_knobs["i_oct_b1"] = -300
+d_config_knobs["i_oct_b2"] = -300
 
 # Dispersion correction # ! Must be off, otherwise matching of tune and chroma fails
 d_config_knobs["on_disp"] = 0
@@ -380,7 +380,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "tune_scan_start_of_collapse_round"
+study_name = "tune_scan_start_of_collapse_flat"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):
