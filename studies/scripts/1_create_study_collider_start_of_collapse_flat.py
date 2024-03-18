@@ -106,11 +106,13 @@ d_config_knobs = {}
 d_config_knobs["on_x1"] = 250
 d_config_knobs["on_sep1"] = -2
 d_config_knobs["on_x2"] = -170
-d_config_knobs["on_sep2"] = 0.138
+d_config_knobs["on_sep2"] = -3.5
 d_config_knobs["on_x5"] = 250
 d_config_knobs["on_sep5"] = 2
 d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
+d_config_knobs["on_sep8h"] = 0.0
+d_config_knobs["on_sep8v"] = -3.5
 
 # Crab cavities
 d_config_knobs["on_crab1"] = 0
@@ -137,13 +139,13 @@ d_config_leveling = {
     "ip2": {},
     "ip8": {},
 }
-
+skip_leveling = True
 # Luminosity and particles
 
 
 # Leveling parameters (ignored if skip_leveling is True)
-d_config_leveling["ip2"]["separation_in_sigmas"] = 5
-d_config_leveling["ip8"]["luminosity"] = 2.0e33
+# d_config_leveling["ip2"]["separation_in_sigmas"] = 5
+# d_config_leveling["ip8"]["luminosity"] = 2.0e33
 
 ### Beam beam configuration
 
@@ -249,6 +251,9 @@ d_config_collider["config_knobs_and_tuning"]["knob_settings"] = d_config_knobs
 # Add luminosity configuration
 d_config_collider["config_lumi_leveling_ip1_5"] = d_config_leveling_ip1_5
 d_config_collider["config_lumi_leveling"] = d_config_leveling
+
+# Skip leveling
+d_config_collider["skip_leveling"] = skip_leveling
 
 # Add beam beam configuration
 d_config_collider["config_beambeam"] = d_config_beambeam
@@ -357,7 +362,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "collider_start_of_collapse_flat_same_oct"
+study_name = "collider_start_of_collapse_flat"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):
