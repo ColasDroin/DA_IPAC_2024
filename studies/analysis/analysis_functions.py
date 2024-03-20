@@ -98,6 +98,7 @@ def get_title_from_conf(
     levelling="",
     CC=False,
     display_intensity=True,
+    PU=True,
 ):
     # LHC version
     try:
@@ -194,6 +195,33 @@ def get_title_from_conf(
             luminosity_1_5 = ""
             luminosity_2 = ""
             luminosity_8 = ""
+
+        if PU:
+            try:
+                PU_value_1 = conf_collider["config_beambeam"]["Pile-up_ip1_5_after_optimization"]
+                PU_value_5 = conf_collider["config_beambeam"]["Pile-up_ip1_5_after_optimization"]
+            except:
+                try:
+                    PU_value_1 = conf_collider["config_beambeam"]["Pile-up_ip1_after_optimization"]
+                    PU_value_5 = conf_collider["config_beambeam"]["Pile-up_ip5_after_optimization"]
+                except:
+                    PU_value_1 = None
+                    PU_value_5 = None
+
+            try:
+                PU_value_2 = conf_collider["config_beambeam"]["Pile-up_ip2_after_optimization"]
+                PU_value_8 = conf_collider["config_beambeam"]["Pile-up_ip8_after_optimization"]
+            except:
+                PU_value_2 = None
+                PU_value_8 = None
+            if PU_value_1 is not None:
+                PU_1_5 = f"$PU_{{1/5}} = $" + latex_float(float(PU_value_1)) + ", "
+                PU_2 = f"$PU_{{2}} = $" + latex_float(float(PU_value_2)) + ", "
+                PU_8 = f"$PU_{{8}} = $" + latex_float(float(PU_value_8)) + ""
+            else:
+                PU_1_5 = ""
+                PU_2 = ""
+                PU_8 = ""
 
         # Beta star # ! Manually encoded for now
         if "flathv" in conf_mad["optics_file"]:
@@ -307,6 +335,9 @@ def get_title_from_conf(
             + luminosity_2
             + luminosity_8
             + "\n"
+            + PU_1_5
+            # + PU_2
+            # + PU_8
             + beta
             + ", "
             + polarity
