@@ -111,8 +111,8 @@ d_config_knobs["on_x5"] = 250
 d_config_knobs["on_sep5"] = 2
 d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
-d_config_knobs["on_sep8h"] = 0.0
-d_config_knobs["on_sep8v"] = -3.5
+d_config_knobs["on_sep8h"] = -3.5
+d_config_knobs["on_sep8v"] = 0.0
 
 
 # Crab cavities
