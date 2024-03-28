@@ -119,8 +119,8 @@ d_config_knobs["on_crab1"] = 0
 d_config_knobs["on_crab5"] = 0
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = 300
-d_config_knobs["i_oct_b2"] = 300
+d_config_knobs["i_oct_b1"] = 150
+d_config_knobs["i_oct_b2"] = 150
 
 # Dispersion correction # ! Must be off, otherwise matching of tune and chroma fails
 d_config_knobs["on_disp"] = 0
@@ -153,7 +153,7 @@ skip_leveling = True
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 2.2e11  # type: ignore
+d_config_beambeam["num_particles_per_bunch"] = 2.3e11  # type: ignore
 d_config_beambeam["nemitt_x"] = 2.3e-6  # type: ignore
 d_config_beambeam["nemitt_y"] = 2.3e-6  # type: ignore
 

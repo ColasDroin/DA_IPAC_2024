@@ -117,8 +117,8 @@ d_config_knobs["on_crab1"] = 0
 d_config_knobs["on_crab5"] = 0
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = 300
-d_config_knobs["i_oct_b2"] = 300
+d_config_knobs["i_oct_b1"] = 150
+d_config_knobs["i_oct_b2"] = 150
 
 # Dispersion correction # ! Must be off, otherwise matching of tune and chroma fails
 d_config_knobs["on_disp"] = 0

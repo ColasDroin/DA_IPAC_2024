@@ -386,6 +386,7 @@ def plot_heatmap(
     ylabel="Vertical tune " + r"$Q_y$",
     symmetric=True,
     mask_lower_triangle=True,
+    mask_upper_triangle=False,
     plot_diagonal_lines=True,
     xaxis_ticks_on_top=True,
     title=None,
@@ -448,6 +449,9 @@ def plot_heatmap(
     if not extended_diagonal and mask_lower_triangle:
         mask = np.tri(data_smoothed.shape[0], k=-1)
         mx = np.ma.masked_array(data_smoothed, mask=mask.T)
+    elif not extended_diagonal and mask_upper_triangle:
+        mask = np.tri(data_smoothed.shape[0], k=-1)
+        mx = np.ma.masked_array(data_smoothed, mask=mask)
     elif extended_diagonal:
         try:
             mask = np.tri(data_smoothed.shape[0], k=-5)

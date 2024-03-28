@@ -154,7 +154,7 @@ skip_leveling = True
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 2.2e11  # type: ignore
+d_config_beambeam["num_particles_per_bunch"] = 2.3e11  # type: ignore
 d_config_beambeam["nemitt_x"] = 2.3e-6  # type: ignore
 d_config_beambeam["nemitt_y"] = 2.3e-6  # type: ignore
 

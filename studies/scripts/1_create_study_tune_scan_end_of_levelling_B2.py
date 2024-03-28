@@ -58,7 +58,7 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 ### For v1.6 optics
 d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc"
 d_config_mad["optics_file"] = (
-    "../../../../external_dependencies/additional_optics/opt_collapse_flathv_900_1800_1500_thin.madx"
+    "../../../../external_dependencies/additional_optics/opt_round_150_1500_optphases_thin.madx"
 )
 d_config_mad["ver_hllhc_optics"] = 1.6
 
@@ -113,23 +113,23 @@ d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
 
 # Crab cavities
-d_config_knobs["on_crab1"] = 0
-d_config_knobs["on_crab5"] = 0
+d_config_knobs["on_crab1"] = -190
+d_config_knobs["on_crab5"] = -190
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = -300
-d_config_knobs["i_oct_b2"] = -300
+d_config_knobs["i_oct_b1"] = -60.0
+d_config_knobs["i_oct_b2"] = -60.0
 
-# Dispersion correction # ! Must be off, otherwise matching of tune and chroma fails
-d_config_knobs["on_disp"] = 0
+# Dispersion correction
+d_config_knobs["on_disp"] = 1
 
 ### leveling configuration
 
 # Leveling in IP 1/5
-d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": True}
-# d_config_leveling_ip1_5["luminosity"] = 2.0e34  # type: ignore
-# d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
-# d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
+d_config_leveling_ip1_5 = {"constraints": {}}
+d_config_leveling_ip1_5["luminosity"] = 5e34  # type: ignore
+d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
+d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
 
 
 # Define dictionary for the leveling settings
@@ -151,9 +151,9 @@ d_config_leveling["ip8"]["luminosity"] = 2.0e33
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 2.2e11  # type: ignore
-d_config_beambeam["nemitt_x"] = 2.3e-6  # type: ignore
-d_config_beambeam["nemitt_y"] = 2.3e-6  # type: ignore
+d_config_beambeam["num_particles_per_bunch"] = 2.2e11  # ! optimized
+d_config_beambeam["nemitt_x"] = 2.5e-6  # type: ignore
+d_config_beambeam["nemitt_y"] = 2.5e-6  # type: ignore
 
 # Filling scheme (in json format)
 # The scheme should consist of a json file containing two lists of booleans (one for each beam),
@@ -267,7 +267,7 @@ d_config_simulation["n_turns"] = 1000000
 d_config_simulation["delta_max"] = 27.0e-5
 
 # Beam to track (lhcb1 or lhcb2)
-d_config_simulation["beam"] = "lhcb1"
+d_config_simulation["beam"] = "lhcb2"
 
 # ==================================================================================================
 # --- Dump collider and collider configuration
@@ -375,7 +375,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "tune_scan_end_of_collapse_flat_same_oct"
+study_name = "tune_scan_end_of_levelling_B2"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):
