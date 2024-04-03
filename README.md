@@ -60,3 +60,35 @@ poetry env list --full-path
 ```
 
 Identify the virtual environment that is being used and copy the corresponding path. Now, open the file `source_python.sh` and replace the line `source $SCRIPT_DIR/.venv/bin/activate`with the path to the virtual environment you just found (e.g. `source /path/to/your/virtual/environment/bin/activate`).
+
+## Running the code
+
+Please refer to the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study)
+if you need more information. The basic workflow is the following:
+
+1. Create a new study by copying and modifying the `studies/scripts/1_create_study.py` file. Running the file will create the corresponding study in the `studies/scans` folder.
+2. Run the study by submitting the corresponding job to the cluster (or running it locally) with the `studies/scripts/2_run_jobs.py` script, which you must prealably modify to point to the correct study (just update the `study_name`variable).
+3. Postprocess the output with the `studies/scripts/3_postprocess.py` script, which you must also modify to point to the correct study.
+4. Results are now in the scan folder of the study, as a parquet file. Some example of analyses are provided in the `studies/analysis` folder.
+
+## License
+
+This repository is licensed under the MIT license. Please refer to the [LICENSE](LICENSE) file for more information.
+
+## Acknowledgements
+
+This work was supported by the HL-LHC project.
+
+
+## Citation
+
+If you use this code for your work, please cite the corresponding article:
+
+```
+@inproceedings{droin2024status,
+  title={Status of beam-beam studies for the high-luminosity LHC},
+  author={Droin, Colas and others},
+  booktitle={Proceedings of the 2024 International Particle Accelerator Conference (IPAC'24)},
+  year={2024}
+}
+```
