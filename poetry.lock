@@ -2248,12 +2248,12 @@ tests = ["pytest", "pytest-mock"]
 
 [[package]]
 name = "xpart"
-version = "0.18.0"
+version = "0.17.0"
 description = "Generation of Particle Ensembles"
 optional = false
 python-versions = "*"
 files = [
-    {file = "xpart-0.18.0.tar.gz", hash = "sha256:67a052efce92d40893bdb5874728a9e364ae44db0cdb540e6bef38740777540d"},
+    {file = "xpart-0.17.0.tar.gz", hash = "sha256:7356806397b4ac4064b073439c66f84864b9d79f14d61db8ac4bde7caf4ab350"},
 ]
 
 [package.dependencies]
@@ -2325,4 +2325,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "51ea87f6d952c6b2aca26d8aac84053b15be6ca9d2fe5a9c140750cf88687271"
+content-hash = "14c85e7e96d19fadf41940186a5650fb8b6401f12db9fcb079c97db262647794"

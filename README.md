@@ -93,7 +93,7 @@ if you need more information.
 
 ## Studies done for the article
 
-All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder. The `studies/analysis` folder contains the scripts used to produce the plots of the article.
+All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder, available as parquet files. The `studies/analysis` folder contains the scripts used to produce the plots of the article.
 
 You can find the raw output of the `studies/scans` folder at the following link: # TODO
 

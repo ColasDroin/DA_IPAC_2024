@@ -16,10 +16,11 @@ pandas = "^2.2.1"
 fastparquet = "^2024.2.0"
 psutil = "^5.9.8"
 cpymad = "^1.15.0"
-xsuite = "^0.6.0"
-tree-maker = {git = "ssh://git@github.com/xsuite/tree_maker.git"}
+xsuite = "0.6.0"
+xpart = "0.17.0"
 xmask = {path = "external_dependencies/xmask", develop = true}
 xtrack = {path = "external_dependencies/xtrack", develop = true}
+tree-maker = {git = "ssh://git@github.com/xsuite/tree_maker.git"}
 ipykernel = "^6.29.3"
 seaborn = "^0.13.2"
 
