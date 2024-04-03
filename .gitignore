@@ -8,15 +8,6 @@ __pycache__/
 studies/submission_files/*
 !studies/submission_files/.gitkeep
 
-# Scans
-studies/scans/**/base_collider
-studies/scans/**/id_job.yaml
-studies/scans/**/tree_maker.json
-studies/scans/**/tree_maker.log
-!studies/scans/.gitkeep
-
-#!studies/scans/*/
-
 # Heavy file
 *.json
 *.parquet
@@ -30,3 +21,10 @@ studies/scans/**/tree_maker.log
 #vscode config
 .vscode/
 
+# Scans
+studies/scans/**/base_collider
+studies/scans/**/id_job.yaml
+studies/scans/**/tree_maker.json
+studies/scans/**/tree_maker.log
+!studies/scans/**/da.parquet
+!studies/scans/.gitkeep
