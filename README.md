@@ -79,12 +79,11 @@ This repository is licensed under the MIT license. Please refer to the [LICENSE]
 
 This work was supported by the HL-LHC project.
 
-
 ## Citation
 
 If you use this code for your work, please cite the corresponding article:
 
-```
+```bibtex
 @inproceedings{droin2024status,
   title={Status of beam-beam studies for the high-luminosity LHC},
   author={Droin, Colas and others},
