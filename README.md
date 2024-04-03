@@ -1,7 +1,6 @@
-# Status of beam-beam studies for the high-luminosity LHC
+# Status of beam-beam studies for the HL-LHC
 
-This repository contains the code and results for the article "STATUS OF BEAM-BEAM STUDIES FOR THE HIGH-LUMINOSITY LHC", published in the proceedings of the 2024 International Particle Accelerator Conference (IPAC'24).
-
+This repository contains the code and results for the article "Status OF beam-beam studies for the high-luminosity LHC", published in the proceedings of the 2024 International Particle Accelerator Conference (IPAC'24).
 
 ## Getting started
 
