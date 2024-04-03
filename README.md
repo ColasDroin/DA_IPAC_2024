@@ -50,22 +50,16 @@ Finally, you can make the xsuite faster by precompiling the kernel, with:
 poetry run xsuite-prebuild
 ```
 
-To run any subsequent Python command, either activate the virtual environment with:
+To run any subsequent Python command, either activate the virtual environment (activate a shell within Poetry) with:
 
 ```bash
-source .venv/bin/activate
+poetry shell
 ```
 
 or run the command with Poetry:
 
 ```bash
 poetry run python my_script.py
-```
-
-or get a shell within Poetry:
-
-```bash
-poetry shell
 ```
 
 ### Fix the virtual environment path
@@ -88,15 +82,13 @@ The basic workflow to run a given scan is the following:
 3. Postprocess the output with the `studies/scripts/3_postprocess.py` script, which you must also modify to point to the correct study.
 4. Results are now in the scan folder of the study, as a parquet file. Some example of analyses are provided in the `studies/analysis` folder.
 
-Do not hesitate to refer to the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study)
-if you need more information. 
+Do not hesitate to refer to the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study) if you need more information.
 
 ## Studies done for the article
 
 All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder, available as parquet files. The `studies/analysis` folder contains the scripts used to produce the plots of the article.
 
 You can find the raw output of the `studies/scans` folder at the following link: # TODO
-
 
 ## License
 
