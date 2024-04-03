@@ -21,7 +21,7 @@ If not already done, install Poetry following the tutorial [here](https://python
 You can check the executable of Python that Poetry is using by running the following command:
 
 ```bash
-poetry env info
+poetry env info --executable
 ```
 
 If needed, you can change the exectutable with e.g:
@@ -59,4 +59,4 @@ update the submitting script to point to the correct virtual environment. To tha
 poetry env list --full-path
 ```
 
-Now, open the file `source_python.sh` and replace the line `source $SCRIPT_DIR/.venv/bin/activate`with the path to the virtual environment you just found (e.g. `source /path/to/your/virtual/environment/bin/activate`).
+Identify the virtual environment that is being used and copy the corresponding path. Now, open the file `source_python.sh` and replace the line `source $SCRIPT_DIR/.venv/bin/activate`with the path to the virtual environment you just found (e.g. `source /path/to/your/virtual/environment/bin/activate`).
