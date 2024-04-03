@@ -1,10 +1,10 @@
 # Status of beam-beam studies for the HL-LHC
 
-This repository contains the code and results for the article "Status of beam-beam studies for the high-luminosity LHC" by C. Droin & al., published in the proceedings of the 2024 International Particle Accelerator Conference (IPAC'24).
+This repository contains the code and results for the article *Status of beam-beam studies for the high-luminosity LHC* by C. Droin & al., published in the proceedings of the 2024 International Particle Accelerator Conference (IPAC'24).
 
 ## Code structure
 
-All the code is based on a refactoring of the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study). The corresponding readme of the repository should contain all the necessary information to understand the code structure. However, for reproducibility purposes, the present study is embedded with Poetry. A minimal tutorial to get started with the code is provided below.
+All the code is based on a refactoring of the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study). The corresponding README should contain all the necessary information to understand the code structure. However, for reproducibility purposes, the present study is embedded with Poetry. A minimal tutorial to get started with the code is provided below.
 
 ## Getting started
 
