@@ -10,11 +10,29 @@ All the code is based on a refactoring of the [Xsuite example_DA_study boilerpla
 
 ### Cloning the repository and corresponding submodules
 
+Run the following command to clone the repository and all the relevant submodules needed for this study (xmask with lhc-errors, xtrack with crab cavities luminosity computation):
+
 ```bash
-git clone --recurse-submodules
+git clone --recurse-submodules https://github.com/ColasDroin/DA_IPAC_2024.git
 ```
 
+If not already done, install Poetry following the tutorial [here](https://python-poetry.org/docs/). Then, for easier submission later, impose the virtual environment to be created in the repository folder by running the following command:
+
+```bash
+poetry config virtualenvs.in-project true
+```
+
+Finally, install the dependencies by running the following command:
+
+```bash
+
+
+
+
 Accelerate things by running the following command:
+
+
+
 
 ```bash
 poetry run xsuite-prebuild
