@@ -5,8 +5,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib_inline
 import numpy as np
-import qrcode
-import seaborn as sns
 import yaml
 from scipy.ndimage.filters import gaussian_filter
 
@@ -19,56 +17,6 @@ def apply_heatmap_style():
     matplotlib.rcParams["mathtext.default"] = "regular"
     matplotlib.rcParams["font.weight"] = "light"
     matplotlib_inline.backend_inline.set_matplotlib_formats("retina")
-
-
-def apply_other_style():
-    # Apply better style
-    sns.set_theme(style="whitegrid")
-    custom_params = {"axes.spines.right": False, "axes.spines.top": False}
-    sns.set_theme(style="ticks", rc=custom_params)
-    # sns.set(font='Adobe Devanagari')
-    sns.set_context("paper", font_scale=1, rc={"lines.linewidth": 0.5, "grid.linewidth": 0.3})
-
-    matplotlib.rcParams["mathtext.fontset"] = "cm"
-    matplotlib.rcParams["font.family"] = "STIXGeneral"
-    # Not italized latex
-    matplotlib.rcParams["mathtext.default"] = "regular"
-    matplotlib.rcParams["font.weight"] = "light"
-
-
-# To add QR codes to plot
-def add_QR_code(fig, link):
-    # Add QR code pointing to the github repository
-    qr = qrcode.QRCode(
-        # version=None,
-        box_size=10,
-        border=1,
-    )
-    qr.add_data(link)
-    qr.make(fit=False)
-    im = qr.make_image(fill_color="black", back_color="transparent")
-    newax = fig.add_axes([0.9, 0.9, 0.05, 0.05], anchor="NE", zorder=1)
-    newax.imshow(im, resample=False, interpolation="none", filternorm=False)
-    # Add link below qrcode
-    newax.plot([0, 0], [0, 0], color="white", label="link")
-    text = newax.annotate(
-        "lin",
-        xy=(0, 300),
-        xytext=(0, 300),
-        fontsize=30,
-        url=link,
-        bbox=dict(color="white", alpha=1e-6, url=link),
-        alpha=0,
-    )
-    # Hide X and Y axes label marks
-    newax.xaxis.set_tick_params(labelbottom=False)
-    newax.yaxis.set_tick_params(labelleft=False)
-    # Hide X and Y axes tick marks
-    newax.set_xticks([])
-    newax.set_yticks([])
-    newax.set_axis_off()
-
-    return fig
 
 
 # Function to convert floats to scientific latex format
@@ -101,20 +49,7 @@ def get_title_from_conf(
     PU=True,
 ):
     # LHC version
-    try:
-        LHC_version = conf_mad["links"]["acc-models-lhc"].split("external_dependencies/")[1]
-        if LHC_version == "hllhc15":
-            LHC_version = "HL-LHC v1.5"
-        elif LHC_version == "hllhc16" or LHC_version == "acc-models-lhc":
-            LHC_version = "HL-LHC v1.6"
-    except:
-        LHC_version = conf_mad["links"]["acc-models-lhc"].split("optics/")[1]
-        if LHC_version == "runIII":
-            LHC_version = "Run III"
-        if "2023" in conf_mad["optics_file"]:
-            LHC_version = LHC_version + " (2023)"
-        elif "2024" in conf_mad["optics_file"]:
-            LHC_version = LHC_version + " (2024)"
+    LHC_version = "HL-LHC v1.6"
 
     # Energy
     energy_value = float(conf_mad["beam_config"]["lhcb1"]["beam_energy_tot"]) / 1000
@@ -154,7 +89,7 @@ def get_title_from_conf(
                 bunch_intensity_value = conf_collider["config_beambeam"][
                     "num_particles_per_bunch_after_optimization"
                 ]
-            except:
+            except Exception:
                 bunch_intensity_value = conf_collider["config_beambeam"]["num_particles_per_bunch"]
             bunch_intensity = (
                 f"$N_b \simeq $" + latex_float(float(bunch_intensity_value)) + " ppb, "
@@ -535,10 +470,6 @@ def plot_heatmap(
     cbar = ax.figure.colorbar(im, ax=ax, fraction=0.026, pad=0.04)
     cbar.ax.set_ylabel("Minimum DA (" + r"$\sigma$" + ")", rotation=90, va="bottom", labelpad=15)
     plt.grid(visible=None)
-
-    # Add QR code
-    if link is not None:
-        fig = add_QR_code(fig, link)
 
     if add_vline is not None:
         plt.axvline(add_vline, color="black", linestyle="--", linewidth=1)
