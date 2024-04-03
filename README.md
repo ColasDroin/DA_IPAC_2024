@@ -1,6 +1,6 @@
 # Status of beam-beam studies for the HL-LHC
 
-This repository contains the code and results for the article *Status of beam-beam studies for the high-luminosity LHC* by C. Droin & al., published in the proceedings of the 2024 International Particle Accelerator Conference (IPAC'24).
+This repository contains the code and results for the article *Status of beam-beam studies for the high-luminosity LHC* by C. Droin & al., published in the proceedings of the [2024 International Particle Accelerator Conference](https://ipac24.org/).
 
 ## Code structure
 
@@ -86,7 +86,7 @@ Do not hesitate to refer to the [Xsuite example_DA_study boilerplate](https://gi
 
 ## Studies done for the article
 
-All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder, available as parquet files. The `studies/analysis` folder contains the scripts used to produce the plots of the article.
+All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder, available as parquet files. The `studies/analysis` folder contains the scripts with all the plots (and more) used to produce the figures of the article.
 
 You can find the raw output of the `studies/scans` folder at the following link: # TODO
 
