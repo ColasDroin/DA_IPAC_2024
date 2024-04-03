@@ -8,6 +8,12 @@ All the code is based on a refactoring of the [Xsuite example_DA_study boilerpla
 
 ## Getting started
 
+### Cloning the repository and corresponding submodules
+
+```bash
+git clone --recurse-submodules
+```
+
 Accelerate things by running the following command:
 
 ```bash
