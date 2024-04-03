@@ -9,9 +9,12 @@ studies/submission_files/*
 !studies/submission_files/.gitkeep
 
 # Scans
-studies/scans/*
+studies/scans/**/base_collider
+studies/scans/**/id_job.yaml
+studies/scans/**/tree_maker.json
+studies/scans/**/tree_maker.log
 !studies/scans/.gitkeep
-!studies/scans/**/da.parquet
+
 #!studies/scans/*/
 
 # Heavy file
