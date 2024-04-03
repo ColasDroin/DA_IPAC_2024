@@ -50,6 +50,24 @@ Finally, you can make the xsuite faster by precompiling the kernel, with:
 poetry run xsuite-prebuild
 ```
 
+To run any subsequent Python command, either activate the virtual environment with:
+
+```bash
+source .venv/bin/activate
+```
+
+or run the command with Poetry:
+
+```bash
+poetry run python my_script.py
+```
+
+or get a shell within Poetry:
+
+```bash
+poetry shell
+```
+
 ### Fix the virtual environment path
 
 If, for some reason, your virtual environment is not in a `.venv`folder inside of your repository, you will have to
@@ -61,15 +79,24 @@ poetry env list --full-path
 
 Identify the virtual environment that is being used and copy the corresponding path. Now, open the file `source_python.sh` and replace the line `source $SCRIPT_DIR/.venv/bin/activate`with the path to the virtual environment you just found (e.g. `source /path/to/your/virtual/environment/bin/activate`).
 
-## Running the code
+### Running the code
 
-Please refer to the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study)
-if you need more information. The basic workflow is the following:
+The basic workflow to run a given scan is the following:
 
 1. Create a new study by copying and modifying the `studies/scripts/1_create_study.py` file. Running the file will create the corresponding study in the `studies/scans` folder.
 2. Run the study by submitting the corresponding job to the cluster (or running it locally) with the `studies/scripts/2_run_jobs.py` script, which you must prealably modify to point to the correct study (just update the `study_name`variable).
 3. Postprocess the output with the `studies/scripts/3_postprocess.py` script, which you must also modify to point to the correct study.
 4. Results are now in the scan folder of the study, as a parquet file. Some example of analyses are provided in the `studies/analysis` folder.
+
+Do not hesitate to refer to the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study)
+if you need more information. 
+
+## Studies done for the article
+
+All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder. The `studies/analysis` folder contains the scripts used to produce the plots of the article.
+
+You can find the raw output of the `studies/scans` folder at the following link: # TODO
+
 
 ## License
 
