@@ -10,6 +10,7 @@ studies/submission_files/*
 
 # Scans
 studies/scans/*
+!studies/scans/.gitkeep
 
 # Heavy file
 *.json
