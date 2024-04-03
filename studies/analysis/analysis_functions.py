@@ -1,6 +1,3 @@
-import os
-import shutil
-
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib_inline
@@ -22,11 +19,10 @@ def apply_heatmap_style():
 # Function to convert floats to scientific latex format
 def latex_float(f):
     float_str = "{0:.3g}".format(f)
-    if "e" in float_str:
-        base, exponent = float_str.split("e")
-        return r"${0} \times 10^{{{1}}}$".format(base, int(exponent))
-    else:
+    if "e" not in float_str:
         return float_str
+    base, exponent = float_str.split("e")
+    return r"${0} \times 10^{{{1}}}$".format(base, int(exponent))
 
 
 def load_config(config_path):
@@ -75,7 +71,7 @@ def get_title_from_conf(
                     is not None
                 ):
                     CC_value = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_crab1"]
-                    crab_cavities = f"$CC = {{{CC_value:.1f}}}$ $\mu rad$. "
+                    crab_cavities = f"$CC = {{{CC_value:.1f}}}$ $\mu rad$. "  # type: ignore
                 else:
                     crab_cavities = "CC OFF. "
             else:
@@ -91,9 +87,7 @@ def get_title_from_conf(
                 ]
             except Exception:
                 bunch_intensity_value = conf_collider["config_beambeam"]["num_particles_per_bunch"]
-            bunch_intensity = (
-                f"$N_b \simeq $" + latex_float(float(bunch_intensity_value)) + " ppb, "
-            )
+            bunch_intensity = f"$N_b \simeq ${latex_float(float(bunch_intensity_value))} ppb, "  # type: ignore
         else:
             bunch_intensity = ""
 
@@ -111,20 +105,20 @@ def get_title_from_conf(
             luminosity_value_8 = conf_collider["config_beambeam"][
                 "luminosity_ip8_after_optimization"
             ]
-        except:
+        except:  # noqa: E722
             print("Luminosity not found in config, setting to None")
             luminosity_value_1_5 = None
             luminosity_value_2 = None
             luminosity_value_8 = None
         if luminosity_value_1_5 is not None:
             luminosity_1_5 = (
-                f"$L_{{1/5}} = $" + latex_float(float(luminosity_value_1_5)) + "cm$^{-2}$s$^{-1}$, "
+                f"$L_{{1/5}} = ${latex_float(float(luminosity_value_1_5))}" + "cm$^{-2}$s$^{-1}$, "
             )
             luminosity_2 = (
-                f"$L_{{2}} = $" + latex_float(float(luminosity_value_2)) + "cm$^{-2}$s$^{-1}$, "
+                f"$L_{{2}} = ${latex_float(float(luminosity_value_2))}" + "cm$^{-2}$s$^{-1}$, "
             )
             luminosity_8 = (
-                f"$L_{{8}} = $" + latex_float(float(luminosity_value_8)) + "cm$^{-2}$s$^{-1}$"
+                f"$L_{{8}} = ${latex_float(float(luminosity_value_8))}" + "cm$^{-2}$s$^{-1}$"
             )
         else:
             luminosity_1_5 = ""
@@ -135,24 +129,24 @@ def get_title_from_conf(
             try:
                 PU_value_1 = conf_collider["config_beambeam"]["Pile-up_ip1_5_after_optimization"]
                 PU_value_5 = conf_collider["config_beambeam"]["Pile-up_ip1_5_after_optimization"]
-            except:
+            except:  # noqa: E722
                 try:
                     PU_value_1 = conf_collider["config_beambeam"]["Pile-up_ip1_after_optimization"]
                     PU_value_5 = conf_collider["config_beambeam"]["Pile-up_ip5_after_optimization"]
-                except:
+                except:  # noqa: E722
                     PU_value_1 = None
                     PU_value_5 = None
 
             try:
                 PU_value_2 = conf_collider["config_beambeam"]["Pile-up_ip2_after_optimization"]
                 PU_value_8 = conf_collider["config_beambeam"]["Pile-up_ip8_after_optimization"]
-            except:
+            except:  # noqa: E722
                 PU_value_2 = None
                 PU_value_8 = None
             if PU_value_1 is not None:
-                PU_1_5 = f"$PU_{{1/5}} = $" + latex_float(float(PU_value_1)) + ", "
-                PU_2 = f"$PU_{{2}} = $" + latex_float(float(PU_value_2)) + ", "
-                PU_8 = f"$PU_{{8}} = $" + latex_float(float(PU_value_8)) + ""
+                PU_1_5 = f"$PU_{{1/5}} = ${latex_float(float(PU_value_1))}, "
+                PU_2 = f"$PU_{{2}} = ${latex_float(float(PU_value_2))}, "
+                PU_8 = f"$PU_{{8}} = ${latex_float(float(PU_value_8))}" + ""
             else:
                 PU_1_5 = ""
                 PU_2 = ""
@@ -168,13 +162,6 @@ def get_title_from_conf(
             bet2 = r"$\beta^{*}_{y,1}$"
         if betx is not None and bety is not None:
             beta = bet1 + f"$= {{{betx}}}$" + " m, " + bet2 + f"$= {{{bety}}}$" + " m"
-        else:
-            if "75_180" in conf_mad["optics_file"]:
-                beta = bet1 + r"$= 7.5$ cm, " + bet2 + r"$= 18$ cm"
-            elif "500_1000" in conf_mad["optics_file"]:
-                beta = bet1 + r"$= 0.5$ m, " + bet2 + r"$= 1$ m"
-            else:
-                raise ValueError("Optics configuration not automatized yet, or betas not provided")
 
         # Crossing angle at IP1/5
         if "flathv" in conf_mad["optics_file"] or type_crossing == "flathv":
@@ -189,10 +176,10 @@ def get_title_from_conf(
         # else:
         #     raise ValueError("Optics configuration not automatized yet")
         xing_value_IP1 = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x1"]
-        xing_IP1 = phi_1 + f"$= {{{xing_value_IP1:.0f}}}$" + f" $\mu rad$"
+        xing_IP1 = phi_1 + f"$= {{{xing_value_IP1:.0f}}}$" + " $\mu rad$"
 
         xing_value_IP5 = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x5"]
-        xing_IP5 = phi_5 + f"$= {{{xing_value_IP5:.0f}}}$" + f" $\mu rad$"
+        xing_IP5 = phi_5 + f"$= {{{xing_value_IP5:.0f}}}$" + " $\mu rad$"
 
         # Bunch length
         bunch_length_value = conf_collider["config_beambeam"]["sigma_z"] * 100
@@ -212,7 +199,7 @@ def get_title_from_conf(
         try:
             xing_value_IP2h = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x2h"]
             xing_value_IP2v = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x2v"]
-        except:
+        except:  # noqa: E722
             xing_value_IP2h = 0
             xing_value_IP2v = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x2"]
         if xing_value_IP2v != 0 and xing_value_IP2h == 0:
@@ -477,56 +464,3 @@ def plot_heatmap(
 
     plt.savefig("plots/output_" + study_name + ".pdf", bbox_inches="tight")
     plt.show()
-
-
-def copy_study_on_eos(study_name, type_analysis="tune_scan"):
-    path_study = "/afs/cern.ch/work/c/cdroin/private/example_DA_study/master_study/"
-    path_EOS = "/eos/home-c/cdroin/save_simulations/"
-    path_archive = path_EOS + study_name + "/"
-
-    ### Rebuild structue of the study on EOS
-    try:
-        os.mkdir(path_archive)
-    except FileExistsError:
-        print("Directory already exists, continue...")
-
-    # # Copy all master jobs
-    # shutil.copytree(path_study + "master_jobs",
-    #                 path_archive + "master_jobs",
-    #                 dirs_exist_ok=True)
-
-    # Copy analysis
-    suffix_analysis = f"analysis/{type_analysis}/analysis_" + study_name + ".ipynb"
-    path_source_analysis = path_study + suffix_analysis
-    path_destination_analysis = path_archive + suffix_analysis
-    os.makedirs(os.path.dirname(path_destination_analysis), exist_ok=True)
-    shutil.copy(path_source_analysis, path_destination_analysis)
-
-    # Copy scripts to generate and analyse the scan
-    suffix_scripts = [
-        "001_make_folders_" + study_name + ".py",
-    ]
-    #  "002_chronjob.py",
-    #  "003_postprocessing.py"]
-    for suffix in suffix_scripts:
-        path_source = path_study + suffix
-        path_destination = path_archive + suffix
-        shutil.copy(path_source, path_destination)
-
-    # Copy scan
-    print("Start copying scan, this may take a while...")
-    shutil.copytree(
-        path_study + "scans/" + study_name,
-        path_archive + "/scans/" + study_name,
-        dirs_exist_ok=True,
-    )
-
-    return path_archive, path_EOS
-
-
-def archive_and_clean(path_archive, path_EOS):
-    # Convert the archive to a zip file, and export to EOS
-    shutil.make_archive(path_archive, "zip", path_EOS, path_archive.split("/")[-1])
-
-    # Delete the folder archive
-    shutil.rmtree(path_archive)
