@@ -11,7 +11,8 @@ studies/submission_files/*
 # Scans
 studies/scans/*
 !studies/scans/.gitkeep
-!*/da.parquet
+!studies/scans/**/da.parquet
+#!studies/scans/*/
 
 # Heavy file
 *.json
