@@ -78,7 +78,7 @@ Identify the virtual environment that is being used and copy the corresponding p
 The basic workflow to run a given scan is the following:
 
 1. Create a new study by copying and modifying the `studies/scripts/1_create_study.py` file. Running the file will create the corresponding study in the `studies/scans` folder.
-2. Run the study by submitting the corresponding job to the cluster (or running it locally) with the `studies/scripts/2_run_jobs.py` script, which you must prealably modify to point to the correct study (just update the `study_name`variable).
+2. Run the study by submitting the corresponding job to the cluster (or local machine) with the `studies/scripts/2_run_jobs.py` script, which you must prealably modify to point to the correct study (just update the `study_name`variable).
 3. Postprocess the output with the `studies/scripts/3_postprocess.py` script, which you must also modify to point to the correct study.
 4. Results are now in the scan folder of the study, as a parquet file. Some example of analyses are provided in the `studies/analysis` folder.
 
@@ -96,7 +96,7 @@ Plots cited (but not present) in the paper include:
 - tune scan at the start of collapse with flat optic and negative octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_flat_base_collider.pdf`
 - tune scan at the start of collapse with round optic and positive octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_round_pos_oct_base_collider.pdf`
 - tune scan at the start of collapse with flat optic and positive octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_flat_pos_oct_base_collider.pdf`
-- octupole scan at the end of levelling: 'studies/analysis/plots/output_oct_scan_end_of_levelling_base_collider.pdf'
+- octupole scan at the end of levelling: `studies/analysis/plots/output_oct_scan_end_of_levelling_base_collider.pdf`
 
 Other relevant plots (not cited in the paper) include:
 
