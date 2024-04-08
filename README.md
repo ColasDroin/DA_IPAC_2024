@@ -2,6 +2,27 @@
 
 This repository contains the code and results for the article *Status of beam-beam studies for the high-luminosity LHC* by C. Droin & al., published in the proceedings of the [2024 International Particle Accelerator Conference](https://ipac24.org/).
 
+## Studies done for the article
+
+All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder, available as parquet files. The `studies/analysis` folder contains the scripts with all the plots (and more) used to produce the figures of the article.
+
+Plots cited (but not present) in the paper include:
+
+- bunch-by-bunch scan for the end of levelling optic: `studies/analysis/plots/bbb_end_of_levelling.pdf`
+- tune scan with beam 2 for the end of levelling optic: `studies/analysis/plots/output_tune_scan_end_of_levelling_B2_base_collider.pdf`
+- tune scan at the start of collapse with round optic and negative octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_round_base_collider.pdf`
+- tune scan at the start of collapse with flat optic and negative octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_flat_base_collider.pdf`
+- tune scan at the start of collapse with round optic and positive octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_round_pos_oct_base_collider.pdf`
+- tune scan at the start of collapse with flat optic and positive octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_flat_pos_oct_base_collider.pdf`
+- octupole scan at the end of levelling: `studies/analysis/plots/output_oct_scan_end_of_levelling_base_collider.pdf`
+
+Other relevant plots (not cited in the paper) include:
+
+- tune scan at the end of collapse with round optic and positive octupoles: `studies/analysis/plots/output_tune_scan_end_of_collapse_round_pos_oct_base_collider.pdf`
+- tune scan at the end of collapse with flat optic and positive octupoles: `studies/analysis/plots/output_tune_scan_end_of_collapse_flat_pos_oct_base_collider.pdf`
+
+If you want to explore the postprocessing yourself, you can find the raw output of the `studies/scans` folder at the following link: <https://cernbox.cern.ch/s/lIggrkFOPf4oSlB>
+
 ## Code structure
 
 All the code is based on a refactoring of the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study). The corresponding README should contain all the necessary information to understand the code structure. However, for reproducibility purposes, the present study is embedded with Poetry. A minimal tutorial to get started with the code is provided below.
@@ -83,27 +104,6 @@ The basic workflow to run a given scan is the following:
 4. Results are now in the scan folder of the study, as a parquet file. Some example of analyses are provided in the `studies/analysis` folder.
 
 Do not hesitate to refer to the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study) if you need more information.
-
-## Studies done for the article
-
-All the studies in the `studies/scripts` folder are the ones that were used to produce the results of the article. The corresponding results (without the scans themselves) are in the `studies/scans` folder, available as parquet files. The `studies/analysis` folder contains the scripts with all the plots (and more) used to produce the figures of the article.
-
-Plots cited (but not present) in the paper include:
-
-- bunch-by-bunch scan for the end of levelling optic: `studies/analysis/plots/bbb_end_of_levelling.pdf`
-- tune scan with beam 2 for the end of levelling optic: `studies/analysis/plots/output_tune_scan_end_of_levelling_B2_base_collider.pdf`
-- tune scan at the start of collapse with round optic and negative octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_round_base_collider.pdf`
-- tune scan at the start of collapse with flat optic and negative octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_flat_base_collider.pdf`
-- tune scan at the start of collapse with round optic and positive octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_round_pos_oct_base_collider.pdf`
-- tune scan at the start of collapse with flat optic and positive octupoles: `studies/analysis/plots/output_tune_scan_start_of_collapse_flat_pos_oct_base_collider.pdf`
-- octupole scan at the end of levelling: `studies/analysis/plots/output_oct_scan_end_of_levelling_base_collider.pdf`
-
-Other relevant plots (not cited in the paper) include:
-
-- tune scan at the end of collapse with round optic and positive octupoles: `studies/analysis/plots/output_tune_scan_end_of_collapse_round_pos_oct_base_collider.pdf`
-- tune scan at the end of collapse with flat optic and positive octupoles: `studies/analysis/plots/output_tune_scan_end_of_collapse_flat_pos_oct_base_collider.pdf`
-
-If you want to explore the postprocessing yourself, you can find the raw output of the `studies/scans` folder at the following link: <https://cernbox.cern.ch/s/lIggrkFOPf4oSlB>
 
 ## License
 
