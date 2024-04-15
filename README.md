@@ -23,6 +23,15 @@ Other relevant plots (not cited in the paper) include:
 
 If you want to explore the postprocessing yourself, you can find the raw output of the `studies/scans` folder at the following link: <https://cernbox.cern.ch/s/lIggrkFOPf4oSlB>
 
+## Optics used
+
+The optics used for the studies are the following:
+
+- collapse round: `external_dependencies/additional_optics/opt_collapse_1100_1500_thin.madx`
+- collapse flat: `external_dependencies/additional_optics/opt_collapse_flathv_900_1800_1500_thin.madx`
+- start of levelling: `external_dependencies/additional_optics/opt_levelling_580_1500_thin.madx`
+- end of levelling: `external_dependencies/additional_optics/opt_round_150_1500_optphases_thin.madx`
+
 ## Code structure
 
 All the code is based on a refactoring of the [Xsuite example_DA_study boilerplate](https://github.com/xsuite/example_DA_study). The corresponding README should contain all the necessary information to understand the code structure. However, for reproducibility purposes, the present study is embedded with Poetry. A minimal tutorial to get started with the code is provided below.
