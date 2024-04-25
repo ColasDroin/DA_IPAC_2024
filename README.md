@@ -48,10 +48,10 @@ git clone --recurse-submodules https://github.com/ColasDroin/DA_IPAC_2024.git
 
 If not already done, install Poetry following the tutorial [here](https://python-poetry.org/docs/). Note that Poetry must have access to Python 3.10 or above for the rest of the tutorial to work. More importantly, the executable of Python must be accessible from a cluster node (e.g. located on AFS when submitting jobs to HTCondor) for a submission to work.
 
-You can check the executable of Python that Poetry is using by running the following command:
+You can check the base executable of Python that Poetry is using by running the following command:
 
 ```bash
-poetry env info --executable
+poetry env info
 ```
 
 If needed, you can change the exectutable with e.g:
