@@ -43,6 +43,7 @@ def get_title_from_conf(
     CC=False,
     display_intensity=True,
     PU=True,
+    display_xing=True,
 ):
     # LHC version
     LHC_version = "HL-LHC v1.6"
@@ -181,6 +182,10 @@ def get_title_from_conf(
         xing_value_IP5 = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x5"]
         xing_IP5 = phi_5 + f"$= {{{xing_value_IP5:.0f}}}$" + " $\mu rad$"
 
+        if not display_xing:
+            xing_IP1 = ""
+            xing_IP5 = ""
+
         # Bunch length
         bunch_length_value = conf_collider["config_beambeam"]["sigma_z"] * 100
         bunch_length = f"$\sigma_{{z}} = {{{bunch_length_value}}}$ $cm$"
@@ -314,6 +319,7 @@ def plot_heatmap(
     title=None,
     add_vline=None,
     display_intensity=True,
+    display_xing=True,
     vmin=4.5,
     vmax=7.5,
     extended_diagonal=False,
@@ -432,6 +438,7 @@ def plot_heatmap(
                 levelling=levelling,
                 CC=CC,
                 display_intensity=display_intensity,
+                display_xing=display_xing,
             ),
             fontsize=10,
         )
