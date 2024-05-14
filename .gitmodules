@@ -6,6 +6,6 @@
 	path = external_dependencies/xtrack
 	url = https://github.com/ColasDroin/xtrack.git
 	branch = lumi_with_crabs
-[submodule "external_dependencies/hllhc13"]
-	path = external_dependencies/hllhc13
+[submodule "external_dependencies/acc-models-lhc-v13"]
+	path = external_dependencies/acc-models-lhc-v13
 	url = https://github.com/lhcopt/hllhc13.git
