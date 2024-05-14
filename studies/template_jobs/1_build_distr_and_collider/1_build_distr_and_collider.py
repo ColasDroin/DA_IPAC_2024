@@ -151,7 +151,7 @@ def build_collider_from_mad(config_mad, sanity_checks=True):
 def activate_RF_and_twiss(collider, config_mad, sanity_checks=True):
     # Define a RF system (values are not so immportant as they're defined later)
     print("--- Now Computing Twiss assuming:")
-    if config_mad["ver_hllhc_optics"] == 1.6:
+    if config_mad["ver_hllhc_optics"] == 1.6 or config_mad["ver_hllhc_optics"] == 1.3:
         dic_rf = {"vrf400": 16.0, "lagrf400.b1": 0.5, "lagrf400.b2": 0.5}
         for knob, val in dic_rf.items():
             print(f"    {knob} = {val}")

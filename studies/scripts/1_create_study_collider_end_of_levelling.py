@@ -60,7 +60,7 @@ d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc
 d_config_mad["optics_file"] = (
     "../../../../external_dependencies/additional_optics/opt_round_150_1500_optphases_thin.madx"
 )
-d_config_mad["ver_hllhc_optics"] = 1.6
+d_config_mad["ver_hllhc_optics"] = 1.3
 
 
 # Beam energy (for both beams)
