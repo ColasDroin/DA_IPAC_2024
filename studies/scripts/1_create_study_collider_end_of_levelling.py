@@ -56,7 +56,7 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 # Optic file path (version, and round or flat)
 
 ### For v1.6 optics
-d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc"
+d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc-v13"
 d_config_mad["optics_file"] = (
     "../../../../external_dependencies/additional_optics/opt_round_150_1500_optphases_thin.madx"
 )
