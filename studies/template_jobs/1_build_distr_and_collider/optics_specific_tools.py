@@ -38,7 +38,7 @@ def check_xsuite_lattices(my_line):
 def build_sequence(
     mad,
     mylhcbeam,
-    apply_fix=True,
+    apply_fix=False,
     ignore_cycling=False,
     incorporate_CC=True,
 ):
