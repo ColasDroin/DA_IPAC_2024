@@ -1,0 +1,132 @@
+2024-05-16 11:46:14.627 INFO __init__ - <module>: Starting imports
+2024-05-16 11:46:15.658 INFO context_cpu - <module>: pyfftw not available, will use numpy
+2024-05-16 11:46:15.660 INFO context_pyopencl - <module>: pyopencl is not installed, ContextPyopencl will not be available
+2024-05-16 11:46:15.660 INFO context_cupy - <module>: cupy is not installed, ContextCupy will not be available
+2024-05-16 11:46:18.424 INFO __main__ - main: Launching app with the following parameters:
+2024-05-16 11:46:18.424 INFO __main__ - main: Collider path: /afs/cern.ch/work/c/cdroin/private/DA_HL_2024_v13/studies/scans/collider_end_of_levelling/base_collider/xtrack_0000/collider.json
+2024-05-16 11:46:18.424 INFO __main__ - main: Filling path: None
+2024-05-16 11:46:18.424 INFO __main__ - main: Port: 8085
+2024-05-16 11:46:18.424 INFO __main__ - main: Force reload: False
+2024-05-16 11:46:18.424 INFO __main__ - main: Ignore footprint: False
+2024-05-16 11:46:18.424 INFO __main__ - main: Full Twiss tables: False
+2024-05-16 11:46:18.424 INFO __main__ - main: Particles type: proton
+2024-05-16 11:46:18.424 INFO __main__ - main: Debug: False
+2024-05-16 11:46:18.424 INFO compute_globals - init_from_collider: Returning global variables from pickle file.
+2024-05-16 11:46:18.935 INFO dashboard - build_app: Defining app
+2024-05-16 11:46:18.942 INFO dashboard - build_app: Defining app layout
+Some collider data already exists for this path, loading it.
+Dash is running on http://0.0.0.0:8085/
+
+2024-05-16 11:46:18.945 INFO dash - run: Dash is running on http://0.0.0.0:8085/
+
+ * Serving Flask app 'collider_dashboard.dashboard'
+ * Debug mode: off
+2024-05-16 11:46:18.957 INFO _internal - _log: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8085
+ * Running on http://128.141.185.229:8085
+2024-05-16 11:46:18.957 INFO _internal - _log: [33mPress CTRL+C to quit[0m
+2024-05-16 12:02:22.826 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET / HTTP/1.1" 200 -
+2024-05-16 12:02:22.946 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /assets/style.css?m=1715849268.0 HTTP/1.1" 200 -
+2024-05-16 12:02:22.946 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/deps/react@16.v2_17_0m1715849266.14.0.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.947 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/deps/prop-types@15.v2_17_0m1715849266.8.1.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.947 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/deps/polyfill@7.v2_17_0m1715849266.12.1.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.948 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/deps/react-dom@16.v2_17_0m1715849266.14.0.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.959 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash_mantine_components/dash_mantine_components.v0_12_1m1715849121.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.995 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/dash-renderer/build/dash_renderer.v2_17_0m1715849265.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.996 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash_iconify/dash_iconify.v0_1_2m1715849121.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.997 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/dcc/dash_core_components-shared.v2_14_0m1715849266.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.997 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/html/dash_html_components.v2_0_18m1715849266.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:22.998 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:22] "GET /_dash-component-suites/dash/dcc/dash_core_components.v2_14_0m1715849266.js HTTP/1.1" 200 -
+2024-05-16 12:02:23.002 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:23] "GET /_dash-component-suites/dash/dash_table/bundle.v5_2_11m1715849265.js HTTP/1.1" 200 -
+2024-05-16 12:02:23.293 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:23] "GET /_dash-dependencies HTTP/1.1" 200 -
+2024-05-16 12:02:23.298 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:23] "GET /_dash-layout HTTP/1.1" 200 -
+2024-05-16 12:02:23.342 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:23] "GET /_dash-component-suites/dash_iconify/async-DashIconify.v0_1_2m1650551946.js HTTP/1.1" 200 -
+2024-05-16 12:02:23.381 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:23] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:23.686 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:23] "GET /assets/favicon.ico?m=1715849268.0 HTTP/1.1" 200 -
+2024-05-16 12:02:31.863 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:31] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:31.917 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:31] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:33.235 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:33] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:33.967 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:33] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:34.797 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:34] "GET /_dash-component-suites/dash/dash_table/async-highlight.js HTTP/1.1" 200 -
+2024-05-16 12:02:34.797 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:34] "GET /_dash-component-suites/dash/dash_table/async-table.js HTTP/1.1" 200 -
+2024-05-16 12:02:35.043 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:35] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:35.090 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:35] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:37.541 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:37] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:39.303 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:39] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:41.070 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:41] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:41.095 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:41] "GET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1" 200 -
+2024-05-16 12:02:41.098 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:41] "GET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1" 200 -
+2024-05-16 12:02:41.980 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:41] "[35m[1mPOST /_dash-update-component HTTP/1.1[0m" 204 -
+2024-05-16 12:02:41.985 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:41] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:02:50.335 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:02:50] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:04.198 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:04] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:04.269 INFO plot - return_plot_footprint: Starting computation footprint figure
+2024-05-16 12:07:04.538 INFO plot - return_plot_footprint: Returning footprint figure
+2024-05-16 12:07:04.538 INFO plot - return_plot_footprint: Starting computation footprint figure
+2024-05-16 12:07:04.575 INFO plot - return_plot_footprint: Returning footprint figure
+2024-05-16 12:07:04.575 INFO plot - return_plot_footprint: Starting computation footprint figure
+2024-05-16 12:07:04.611 INFO plot - return_plot_footprint: Returning footprint figure
+2024-05-16 12:07:04.611 INFO plot - return_plot_footprint: Starting computation footprint figure
+2024-05-16 12:07:04.648 INFO plot - return_plot_footprint: Returning footprint figure
+2024-05-16 12:07:04.658 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:04] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:12.667 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:12] "[35m[1mPOST /_dash-update-component HTTP/1.1[0m" 204 -
+2024-05-16 12:07:12.705 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:12] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:13.474 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:13] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:36.569 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:36] "[35m[1mPOST /_dash-update-component HTTP/1.1[0m" 204 -
+2024-05-16 12:07:36.571 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:36] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:36.611 INFO plot - return_plot_separation_3D: Starting computation 3D beam-beam separation
+2024-05-16 12:07:36.642 INFO plot - return_plot_separation_3D: Starting ip ip1
+2024-05-16 12:07:36.834 INFO plot - return_plot_separation_3D: Returning 3D beam-beam separation figure
+2024-05-16 12:07:36.839 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:36] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:38.150 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:38] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:38.510 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:38] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:38.927 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:38] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:38.965 INFO plot - return_plot_separation_3D: Starting computation 3D beam-beam separation
+2024-05-16 12:07:38.979 INFO plot - return_plot_separation_3D: Starting ip ip1
+2024-05-16 12:07:39.066 INFO plot - return_plot_separation_3D: Returning 3D beam-beam separation figure
+2024-05-16 12:07:39.071 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:39] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:41.451 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:41] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:41.557 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:41] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:43.797 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:43] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:58.066 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:58] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:58.244 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:58] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:59.454 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:59] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:07:59.456 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:07:59] "[35m[1mPOST /_dash-update-component HTTP/1.1[0m" 204 -
+2024-05-16 12:08:00.069 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:00] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:00.190 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:00] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:00.192 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:00] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:01.560 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:01] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:01.684 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:01] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:02.066 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:02] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:02.067 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:02] "[35m[1mPOST /_dash-update-component HTTP/1.1[0m" 204 -
+2024-05-16 12:08:03.116 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:03] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:03.223 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:03] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:04.171 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:04] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:04.299 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:04] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:08:05.309 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:05] "[35m[1mPOST /_dash-update-component HTTP/1.1[0m" 204 -
+2024-05-16 12:08:05.329 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:08:05] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:22:10.053 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:22:10] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:22:10.126 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:22:10] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:22:18.781 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:22:18] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:22:47.540 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:22:47] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:55.334 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:55] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:56.144 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:56] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:56.320 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:56] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:57.508 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:57] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:57.511 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:57] "[35m[1mPOST /_dash-update-component HTTP/1.1[0m" 204 -
+2024-05-16 12:29:58.228 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:58] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:58.744 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:58] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:58.955 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:58] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:29:59.590 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:29:59] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:30:01.378 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:30:01] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:30:02.073 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:30:02] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:30:02.170 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:30:02] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:30:02.999 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:30:02] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 12:30:03.030 INFO plot - return_plot_separation_3D: Starting computation 3D beam-beam separation
+2024-05-16 12:30:03.046 INFO plot - return_plot_separation_3D: Starting ip ip1
+2024-05-16 12:30:03.129 INFO plot - return_plot_separation_3D: Returning 3D beam-beam separation figure
+2024-05-16 12:30:03.133 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 12:30:03] "POST /_dash-update-component HTTP/1.1" 200 -
+2024-05-16 14:12:50.120 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 14:12:50] "GET /_dash-layout HTTP/1.1" 200 -
+2024-05-16 14:12:50.122 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 14:12:50] "GET /_dash-dependencies HTTP/1.1" 200 -
+2024-05-16 14:12:50.201 INFO _internal - _log: 194.12.146.184 - - [16/May/2024 14:12:50] "POST /_dash-update-component HTTP/1.1" 200 -

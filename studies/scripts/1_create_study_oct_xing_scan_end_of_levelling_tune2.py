@@ -56,11 +56,11 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 # Optic file path (version, and round or flat)
 
 ### For v1.6 optics
-d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc"
+d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc-v13"
 d_config_mad["optics_file"] = (
-    "../../../../external_dependencies/additional_optics/opt_round_150_1500_optphases_thin.madx"
+    "../../../../external_dependencies/acc-models-lhc-v13/opt_500_500_500_500_thin.madx"
 )
-d_config_mad["ver_hllhc_optics"] = 1.6
+d_config_mad["ver_hllhc_optics"] = 1.3
 
 
 # Beam energy (for both beams)
@@ -126,7 +126,7 @@ d_config_knobs["on_disp"] = 1
 ### leveling configuration
 
 # Leveling in IP 1/5
-d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": True}
+d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": False}
 d_config_leveling_ip1_5["luminosity"] = 5e34  # type: ignore
 d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
 d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
