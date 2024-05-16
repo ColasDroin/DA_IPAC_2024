@@ -126,7 +126,7 @@ d_config_knobs["on_disp"] = 1
 ### leveling configuration
 
 # Leveling in IP 1/5
-d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": True}
+d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": False}
 d_config_leveling_ip1_5["luminosity"] = 5e34  # type: ignore
 d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
 d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
