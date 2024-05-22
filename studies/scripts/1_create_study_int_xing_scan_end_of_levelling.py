@@ -88,8 +88,8 @@ d_config_tune_and_chroma = {
     "dqy": {},
 }
 for beam in ["lhcb1", "lhcb2"]:
-    d_config_tune_and_chroma["qx"][beam] = 62.313
-    d_config_tune_and_chroma["qy"][beam] = 60.317
+    d_config_tune_and_chroma["qx"][beam] = 62.315
+    d_config_tune_and_chroma["qy"][beam] = 60.320
     d_config_tune_and_chroma["dqx"][beam] = 15.0
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
@@ -117,8 +117,8 @@ d_config_knobs["on_crab1"] = -190
 d_config_knobs["on_crab5"] = -190
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = np.nan  # ! scanned
-d_config_knobs["i_oct_b2"] = np.nan  # ! scanned
+d_config_knobs["i_oct_b1"] = -300.0
+d_config_knobs["i_oct_b2"] = -300.0
 
 # Dispersion correction
 d_config_knobs["on_disp"] = 1
@@ -126,7 +126,7 @@ d_config_knobs["on_disp"] = 1
 ### leveling configuration
 
 # Leveling in IP 1/5
-d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": False}
+d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": True}
 d_config_leveling_ip1_5["luminosity"] = 5e34  # type: ignore
 d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
 d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
@@ -151,7 +151,7 @@ d_config_leveling["ip8"]["luminosity"] = 2.0e33
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 1.2e11  # ! optimized
+d_config_beambeam["num_particles_per_bunch"] = np.nan  # ! scanned
 d_config_beambeam["nemitt_x"] = 2.5e-6  # type: ignore
 d_config_beambeam["nemitt_y"] = 2.5e-6  # type: ignore
 
@@ -285,7 +285,7 @@ dump_config_in_collider = False
 # optimal DA (e.g. tune, chroma, etc).
 # ==================================================================================================
 # Scan tune with step of 0.001 (need to round to correct for numpy numerical instabilities)
-array_I = np.linspace(0, -600, 13, endpoint=True)
+array_intensity = np.linspace(0.8, 1.6, 9, endpoint=True) * 1e11
 array_xing = np.linspace(150, 270, 13, endpoint=True)
 
 # In case one is doing a tune-tune scan, to decrease the size of the scan, we can ignore the
@@ -319,13 +319,14 @@ children["base_collider"]["config_mad"] = d_config_mad
 # ! otherwise the dictionnary will be mutated for all the children.
 # ==================================================================================================
 track_array = np.arange(d_config_particles["n_split"])
-for idx_job, (track, I, xing) in enumerate(itertools.product(track_array, array_I, array_xing)):
+for idx_job, (track, intensity, xing) in enumerate(
+    itertools.product(track_array, array_intensity, array_xing)
+):
     # Mutate the appropriate collider parameters
     for beam in ["lhcb1", "lhcb2"]:
         d_config_collider["config_knobs_and_tuning"]["knob_settings"]["on_x1"] = float(xing)
         d_config_collider["config_knobs_and_tuning"]["knob_settings"]["on_x5"] = float(xing)
-        d_config_collider["config_knobs_and_tuning"]["knob_settings"]["i_oct_b1"] = float(I)
-        d_config_collider["config_knobs_and_tuning"]["knob_settings"]["i_oct_b2"] = float(I)
+        d_config_collider["config_beambeam"]["num_particles_per_bunch"] = float(intensity)
 
     # Complete the dictionnary for the tracking
     d_config_simulation["particle_file"] = f"../particles/{track:02}.parquet"
@@ -366,7 +367,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "oct_xing_scan_end_of_levelling_tune1"
+study_name = "int_xing_scan_end_of_levelling"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):

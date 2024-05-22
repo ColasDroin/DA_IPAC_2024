@@ -58,7 +58,7 @@ d_config_mad = {"beam_config": {"lhcb1": {}, "lhcb2": {}}, "links": {}}
 ### For v1.6 optics
 d_config_mad["links"]["acc-models-lhc"] = "../../../../external_dependencies/acc-models-lhc"
 d_config_mad["optics_file"] = (
-    "../../../../external_dependencies/additional_optics/opt_round_150_1500_optphases_thin.madx"
+    "../../../../external_dependencies/additional_optics/opt_levelling_580_1500_thin.madx"
 )
 d_config_mad["ver_hllhc_optics"] = 1.6
 
@@ -88,8 +88,8 @@ d_config_tune_and_chroma = {
     "dqy": {},
 }
 for beam in ["lhcb1", "lhcb2"]:
-    d_config_tune_and_chroma["qx"][beam] = 62.313
-    d_config_tune_and_chroma["qy"][beam] = 60.317
+    d_config_tune_and_chroma["qx"][beam] = np.nan  # ! scanned
+    d_config_tune_and_chroma["qy"][beam] = np.nan  # ! scanned
     d_config_tune_and_chroma["dqx"][beam] = 15.0
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
@@ -103,11 +103,11 @@ d_config_tune_and_chroma["delta_cmi"] = 0.0  # type: ignore
 d_config_knobs = {}
 
 # Knobs at IPs
-d_config_knobs["on_x1"] = np.nan  # ! scanned
+d_config_knobs["on_x1"] = 250
 d_config_knobs["on_sep1"] = 0
 d_config_knobs["on_x2"] = -170
 d_config_knobs["on_sep2"] = 0.138
-d_config_knobs["on_x5"] = np.nan  # ! scanned
+d_config_knobs["on_x5"] = 250
 d_config_knobs["on_sep5"] = 0
 d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
@@ -117,8 +117,8 @@ d_config_knobs["on_crab1"] = -190
 d_config_knobs["on_crab5"] = -190
 
 # Octupoles
-d_config_knobs["i_oct_b1"] = np.nan  # ! scanned
-d_config_knobs["i_oct_b2"] = np.nan  # ! scanned
+d_config_knobs["i_oct_b1"] = -300.0
+d_config_knobs["i_oct_b2"] = -300.0
 
 # Dispersion correction
 d_config_knobs["on_disp"] = 1
@@ -126,7 +126,7 @@ d_config_knobs["on_disp"] = 1
 ### leveling configuration
 
 # Leveling in IP 1/5
-d_config_leveling_ip1_5 = {"constraints": {}, "skip_leveling": False}
+d_config_leveling_ip1_5 = {"constraints": {}}
 d_config_leveling_ip1_5["luminosity"] = 5e34  # type: ignore
 d_config_leveling_ip1_5["constraints"]["max_intensity"] = 2.3e11
 d_config_leveling_ip1_5["constraints"]["max_PU"] = 160
@@ -151,7 +151,7 @@ d_config_leveling["ip8"]["luminosity"] = 2.0e33
 d_config_beambeam = {"mask_with_filling_pattern": {}}
 
 # Beam settings
-d_config_beambeam["num_particles_per_bunch"] = 1.2e11  # ! optimized
+d_config_beambeam["num_particles_per_bunch"] = 2.2e11  # ! optimized
 d_config_beambeam["nemitt_x"] = 2.5e-6  # type: ignore
 d_config_beambeam["nemitt_y"] = 2.5e-6  # type: ignore
 
@@ -285,12 +285,13 @@ dump_config_in_collider = False
 # optimal DA (e.g. tune, chroma, etc).
 # ==================================================================================================
 # Scan tune with step of 0.001 (need to round to correct for numpy numerical instabilities)
-array_I = np.linspace(0, -600, 13, endpoint=True)
-array_xing = np.linspace(150, 270, 13, endpoint=True)
+array_qx = np.round(np.arange(62.300, 62.330, 0.0025), decimals=4)
+array_qy = np.round(np.arange(60.300, 60.330, 0.0025), decimals=4)
 
 # In case one is doing a tune-tune scan, to decrease the size of the scan, we can ignore the
 # working points too close to resonance. Otherwise just delete this variable in the loop at the end
 # of the script
+keep = "all"  # "upper_triangle"  # 'lower_triangle', 'all'
 # ==================================================================================================
 # --- Make tree for the simulations (generation 1)
 #
@@ -319,13 +320,21 @@ children["base_collider"]["config_mad"] = d_config_mad
 # ! otherwise the dictionnary will be mutated for all the children.
 # ==================================================================================================
 track_array = np.arange(d_config_particles["n_split"])
-for idx_job, (track, I, xing) in enumerate(itertools.product(track_array, array_I, array_xing)):
+for idx_job, (track, qx, qy) in enumerate(itertools.product(track_array, array_qx, array_qy)):
+    # If requested, ignore conditions below the upper diagonal as they can't be reached in the LHC
+    if keep == "upper_triangle":
+        if qy < (qx - 2 + 0.0039):  # 0.039 instead of 0.04 to avoid rounding errors
+            continue
+    elif keep == "lower_triangle":
+        if qy >= (qx - 2 - 0.0039):
+            continue
+    else:
+        pass
+
     # Mutate the appropriate collider parameters
     for beam in ["lhcb1", "lhcb2"]:
-        d_config_collider["config_knobs_and_tuning"]["knob_settings"]["on_x1"] = float(xing)
-        d_config_collider["config_knobs_and_tuning"]["knob_settings"]["on_x5"] = float(xing)
-        d_config_collider["config_knobs_and_tuning"]["knob_settings"]["i_oct_b1"] = float(I)
-        d_config_collider["config_knobs_and_tuning"]["knob_settings"]["i_oct_b2"] = float(I)
+        d_config_collider["config_knobs_and_tuning"]["qx"][beam] = float(qx)
+        d_config_collider["config_knobs_and_tuning"]["qy"][beam] = float(qy)
 
     # Complete the dictionnary for the tracking
     d_config_simulation["particle_file"] = f"../particles/{track:02}.parquet"
@@ -366,7 +375,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "oct_xing_scan_end_of_levelling_tune1"
+study_name = "tune_scan_start_of_levelling_reprod"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):
