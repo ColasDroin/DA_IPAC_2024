@@ -45,6 +45,7 @@ def get_title_from_conf(
     PU=True,
     display_xing=True,
     display_tune=False,
+    ignore_lumi_1_5=False,
 ):
     # LHC version
     LHC_version = "HL-LHC v1.3"
@@ -126,6 +127,8 @@ def get_title_from_conf(
             luminosity_1_5 = ""
             luminosity_2 = ""
             luminosity_8 = ""
+        if ignore_lumi_1_5:
+            luminosity_1_5 = ""
 
         if PU:
             try:
@@ -153,6 +156,10 @@ def get_title_from_conf(
                 PU_1_5 = ""
                 PU_2 = ""
                 PU_8 = ""
+        else:
+            PU_1_5 = ""
+            PU_2 = ""
+            PU_8 = ""
 
         # Beta star # ! Manually encoded for now
         if "flathv" in conf_mad["optics_file"]:
@@ -338,6 +345,8 @@ def plot_heatmap(
     vmax=7.5,
     extended_diagonal=False,
     green_contour=6,
+    ignore_lumi_1_5=False,
+    PU=True,
 ):
     # Get numpy array from dataframe
     data_array = df_to_plot.to_numpy()
@@ -454,6 +463,8 @@ def plot_heatmap(
                 display_intensity=display_intensity,
                 display_xing=display_xing,
                 display_tune=display_tune,
+                ignore_lumi_1_5=ignore_lumi_1_5,
+                PU=PU,
             ),
             fontsize=10,
         )
