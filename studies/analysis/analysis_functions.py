@@ -45,6 +45,7 @@ def get_title_from_conf(
     PU=True,
     display_xing=True,
     display_tune=False,
+    ignore_lumi_1_5=True,
 ):
     # LHC version
     LHC_version = "HL-LHC v1.6"
@@ -126,6 +127,8 @@ def get_title_from_conf(
             luminosity_1_5 = ""
             luminosity_2 = ""
             luminosity_8 = ""
+        if ignore_lumi_1_5:
+            luminosity_1_5 = ""
 
         if PU:
             try:
@@ -153,6 +156,10 @@ def get_title_from_conf(
                 PU_1_5 = ""
                 PU_2 = ""
                 PU_8 = ""
+        else:
+            PU_1_5 = ""
+            PU_2 = ""
+            PU_8 = ""
 
         # Beta star # ! Manually encoded for now
         if "flathv" in conf_mad["optics_file"]:
@@ -335,6 +342,7 @@ def plot_heatmap(
     PU=True,
     display_xing=True,
     display_tune=False,
+    ignore_lumi_1_5=False,
     vmin=4.5,
     vmax=7.5,
     extended_diagonal=False,
@@ -361,8 +369,8 @@ def plot_heatmap(
         for j in range(len(df_to_plot.columns)):
             if data_array[i, j] >= vmax:
                 val = r"$\geq $" + str(vmax)
-            elif data_array[i, j] <= vmin:
-                val = r"$\leq $" + str(vmin)
+            elif data_array[i, j] <= vmin + 1:
+                val = r"$\leq $" + str(vmin + 1)
             else:
                 val = f"{data_array[i, j]:.1f}"
             text = ax.text(j, i, val, ha="center", va="center", color="white", fontsize=4)
@@ -455,6 +463,7 @@ def plot_heatmap(
                 display_intensity=display_intensity,
                 display_xing=display_xing,
                 display_tune=display_tune,
+                ignore_lumi_1_5=ignore_lumi_1_5,
                 PU=PU,
             ),
             fontsize=10,
