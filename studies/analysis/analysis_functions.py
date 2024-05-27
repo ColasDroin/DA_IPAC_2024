@@ -44,6 +44,7 @@ def get_title_from_conf(
     display_intensity=True,
     PU=True,
     display_xing=True,
+    display_tune=False,
 ):
     # LHC version
     LHC_version = "HL-LHC v1.6"
@@ -177,10 +178,10 @@ def get_title_from_conf(
         # else:
         #     raise ValueError("Optics configuration not automatized yet")
         xing_value_IP1 = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x1"]
-        xing_IP1 = phi_1 + f"$= {{{xing_value_IP1:.0f}}}$" + " $\mu rad$"
+        xing_IP1 = phi_1 + f"$= {{{xing_value_IP1:.0f}}}$" + " $\mu rad$, "
 
         xing_value_IP5 = conf_collider["config_knobs_and_tuning"]["knob_settings"]["on_x5"]
-        xing_IP5 = phi_5 + f"$= {{{xing_value_IP5:.0f}}}$" + " $\mu rad$"
+        xing_IP5 = phi_5 + f"$= {{{xing_value_IP5:.0f}}}$" + " $\mu rad$, "
 
         if not display_xing:
             xing_IP1 = ""
@@ -249,6 +250,18 @@ def get_title_from_conf(
         if "12inj" in filling_scheme_value:
             filling_scheme_value = filling_scheme_value.split("12inj")[0] + "12inj"
         filling_scheme = f"{filling_scheme_value}"
+
+        # Tune
+        if display_tune:
+            tune_h_value = conf_collider["config_knobs_and_tuning"]["qx"]["lhcb1"]
+            tune_v_value = conf_collider["config_knobs_and_tuning"]["qy"]["lhcb1"]
+            qx = f"$Q_x = {{{tune_h_value}}}$, "
+            qy = f"$Q_y = {{{tune_v_value}}}$, "
+        else:
+            qx = ""
+            qy = ""
+
+        # Final title
         title = (
             LHC_version
             + ". "
@@ -269,10 +282,10 @@ def get_title_from_conf(
             + ", "
             + polarity
             + "\n"
+            + qx
+            + qy
             + xing_IP1
-            + ", "
             + xing_IP5
-            + ", "
             + xing_IP2
             + ", "
             + xing_IP8
@@ -319,7 +332,9 @@ def plot_heatmap(
     title=None,
     add_vline=None,
     display_intensity=True,
+    PU=True,
     display_xing=True,
+    display_tune=False,
     vmin=4.5,
     vmax=7.5,
     extended_diagonal=False,
@@ -439,6 +454,8 @@ def plot_heatmap(
                 CC=CC,
                 display_intensity=display_intensity,
                 display_xing=display_xing,
+                display_tune=display_tune,
+                PU=PU,
             ),
             fontsize=10,
         )
