@@ -32,7 +32,7 @@ d_config_particles = {}
 # Radius of the initial particle distribution
 d_config_particles["r_min"] = 4
 d_config_particles["r_max"] = 8
-d_config_particles["n_r"] = 2 * 16 * (d_config_particles["r_max"] - d_config_particles["r_min"])
+d_config_particles["n_r"] = 256
 
 # Number of angles for the initial particle distribution
 d_config_particles["n_angles"] = 5
@@ -88,8 +88,8 @@ d_config_tune_and_chroma = {
     "dqy": {},
 }
 for beam in ["lhcb1", "lhcb2"]:
-    d_config_tune_and_chroma["qx"][beam] = 62.31
-    d_config_tune_and_chroma["qy"][beam] = 60.32
+    d_config_tune_and_chroma["qx"][beam] = 62.313
+    d_config_tune_and_chroma["qy"][beam] = 60.319
     d_config_tune_and_chroma["dqx"][beam] = 15.0
     d_config_tune_and_chroma["dqy"][beam] = 15.0
 
@@ -113,8 +113,8 @@ d_config_knobs["on_x8h"] = 0.0
 d_config_knobs["on_x8v"] = 170
 
 # Crab cavities
-d_config_knobs["on_crab1"] = -190  
-d_config_knobs["on_crab5"] = -190 
+d_config_knobs["on_crab1"] = -190
+d_config_knobs["on_crab5"] = -190
 
 # Octupoles
 d_config_knobs["i_oct_b1"] = -60.0
@@ -261,7 +261,7 @@ d_config_collider["config_beambeam"] = d_config_beambeam
 d_config_simulation = {}
 
 # Number of turns to track
-d_config_simulation["n_turns"] = 10
+d_config_simulation["n_turns"] = 1000000
 
 # Initial off-momentum
 d_config_simulation["delta_max"] = 27.0e-5
@@ -275,8 +275,8 @@ d_config_simulation["beam"] = "lhcb1"
 # Below, the user chooses if the gen 2 collider must be dumped, along with the corresponding
 # configuration.
 # ==================================================================================================
-dump_collider = True
-dump_config_in_collider = True
+dump_collider = False
+dump_config_in_collider = False
 
 # ==================================================================================================
 # --- Machine parameters being scanned (generation 2)
@@ -284,10 +284,19 @@ dump_config_in_collider = True
 # Below, the user defines the grid for the machine parameters that must be scanned to find the
 # optimal DA (e.g. tune, chroma, etc).
 # ==================================================================================================
+TOT_PARTICLES = 256 * 5
+array_n_angles = list(range(5, 51, 5))
+array_repeat = list(range(10))
 
-# In case one is doing a tune-tune scan, to decrease the size of the scan, we can ignore the
-# working points too close to resonance. Otherwise just delete this variable in the loop at the end
-# of the script
+
+array_n_r = TOT_PARTICLES // np.array(array_n_angles)
+
+d_config_particles["n_r"] = 256
+
+# Number of angles for the initial particle distribution
+d_config_particles["n_angles"] = 5
+
+
 # ==================================================================================================
 # --- Make tree for the simulations (generation 1)
 #
@@ -297,10 +306,7 @@ dump_config_in_collider = True
 # ==================================================================================================
 
 # Build empty tree: first generation (later added to the root), and second generation
-children = {"base_collider": {"config_particles": {}, "config_mad": {}, "children": {}}}
-
-# Add particles distribution parameters to the first generation
-children["base_collider"]["config_particles"] = d_config_particles
+children = {"base_collider": {"config_mad": {}, "children": {}}}
 
 # Add base machine parameters to the first generation
 children["base_collider"]["config_mad"] = d_config_mad
@@ -316,17 +322,20 @@ children["base_collider"]["config_mad"] = d_config_mad
 # ! otherwise the dictionnary will be mutated for all the children.
 # ==================================================================================================
 track_array = np.arange(d_config_particles["n_split"])
-for idx_job, (track,) in enumerate(
-    itertools.product(
-        track_array,
-    )
+for idx_job, (track, n_angles, idx_repeat) in enumerate(
+    itertools.product(track_array, array_n_angles, array_repeat)
 ):
+    d_config_particles["n_r"] = TOT_PARTICLES // n_angles
+    d_config_particles["n_angles"] = n_angles
+    d_config_particles["idx_repeat"] = idx_repeat
+
     # Complete the dictionnary for the tracking
     d_config_simulation["particle_file"] = f"../particles/{track:02}.parquet"
     d_config_simulation["collider_file"] = "../collider/collider.json"
 
     # Add a child to the second generation, with all the parameters for the collider and tracking
     children["base_collider"]["children"][f"xtrack_{idx_job:04}"] = {
+        "config_particles": copy.deepcopy(d_config_particles),
         "config_simulation": copy.deepcopy(d_config_simulation),
         "config_collider": copy.deepcopy(d_config_collider),
         "log_file": "tree_maker.log",
@@ -360,7 +369,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "collider_end_of_levelling"
+study_name = "statistics_eol"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):

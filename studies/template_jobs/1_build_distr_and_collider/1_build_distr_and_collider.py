@@ -51,48 +51,6 @@ def load_configuration(config_path="config.yaml"):
 
 
 # ==================================================================================================
-# --- Function to build particle distribution and write it to file
-# ==================================================================================================
-def build_particle_distribution(config_particles):
-    # Define radius distribution
-    r_min = config_particles["r_min"]
-    r_max = config_particles["r_max"]
-    n_r = config_particles["n_r"]
-    radial_list = np.linspace(r_min, r_max, n_r, endpoint=False)
-
-    # Filter out particles with low and high amplitude to accelerate simulation
-    # radial_list = radial_list[(radial_list >= 4.5) & (radial_list <= 7.5)]
-
-    # Define angle distribution
-    n_angles = config_particles["n_angles"]
-    theta_list = np.linspace(0, 90, n_angles + 2)[1:-1]
-
-    # Define particle distribution as a cartesian product of the above
-    particle_list = [
-        (particle_id, ii[1], ii[0])
-        for particle_id, ii in enumerate(itertools.product(theta_list, radial_list))
-    ]
-
-    # Split distribution into several chunks for parallelization
-    n_split = config_particles["n_split"]
-    particle_list = list(np.array_split(particle_list, n_split))
-
-    # Return distribution
-    return particle_list
-
-
-def write_particle_distribution(particle_list):
-    # Write distribution to parquet files
-    distributions_folder = "particles"
-    os.makedirs(distributions_folder, exist_ok=True)
-    for idx_chunk, my_list in enumerate(particle_list):
-        pd.DataFrame(
-            my_list,
-            columns=["particle_id", "normalized amplitude in xy-plane", "angle in xy-plane [deg]"],
-        ).to_parquet(f"{distributions_folder}/{idx_chunk:02}.parquet")
-
-
-# ==================================================================================================
 # --- Function to build collider from mad model
 # ==================================================================================================
 def build_collider_from_mad(config_mad, sanity_checks=True):
@@ -200,12 +158,6 @@ def build_distr_and_collider(config_file="config.yaml"):
 
     # Tag start of the job
     tree_maker_tagging(configuration, tag="started")
-
-    # Build particle distribution
-    particle_list = build_particle_distribution(config_particles)
-
-    # Write particle distribution to file
-    write_particle_distribution(particle_list)
 
     # Build collider from mad model
     collider = build_collider_from_mad(config_mad, sanity_checks)

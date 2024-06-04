@@ -7,6 +7,7 @@ simple scripting for reproducibility, to allow rebuilding the collider from a di
 # --- Imports
 # ==================================================================================================
 # Import standard library modules
+import itertools
 import json
 import logging
 import os
@@ -87,6 +88,48 @@ def generate_configuration_correction_files(output_folder="correction"):
     for nn in ["lhcb1", "lhcb2"]:
         with open(f"{output_folder}/corr_co_{nn}.json", "w") as fid:
             json.dump(correction_setup[nn], fid, indent=4)
+
+
+# ==================================================================================================
+# --- Function to build particle distribution and write it to file
+# ==================================================================================================
+def build_particle_distribution(config_particles):
+    # Define radius distribution
+    r_min = config_particles["r_min"]
+    r_max = config_particles["r_max"]
+    n_r = config_particles["n_r"]
+    radial_list = np.linspace(r_min, r_max, n_r, endpoint=False)
+
+    # Add gaussian noise with std = 0.01 to radial_list
+    radial_list += np.random.normal(0, 0.01, n_r)
+
+    # Define angle distribution
+    n_angles = config_particles["n_angles"]
+    theta_list = np.linspace(0, 90, n_angles + 2)[1:-1]
+
+    # Define particle distribution as a cartesian product of the above
+    particle_list = [
+        (particle_id, ii[1], ii[0])
+        for particle_id, ii in enumerate(itertools.product(theta_list, radial_list))
+    ]
+
+    # Split distribution into several chunks for parallelization
+    n_split = config_particles["n_split"]
+    particle_list = list(np.array_split(particle_list, n_split))
+
+    # Return distribution
+    return particle_list
+
+
+def write_particle_distribution(particle_list):
+    # Write distribution to parquet files
+    distributions_folder = "particles"
+    os.makedirs(distributions_folder, exist_ok=True)
+    for idx_chunk, my_list in enumerate(particle_list):
+        pd.DataFrame(
+            my_list,
+            columns=["particle_id", "normalized amplitude in xy-plane", "angle in xy-plane [deg]"],
+        ).to_parquet(f"{distributions_folder}/{idx_chunk:02}.parquet")
 
 
 # ==================================================================================================
@@ -637,6 +680,12 @@ def configure_and_track(config_path="config.yaml"):
 
     # Tag start of the job
     tree_maker_tagging(config, tag="started")
+
+    # Build particle distribution
+    particle_list = build_particle_distribution(config["config_particles"])
+
+    # Write particle distribution to file
+    write_particle_distribution(particle_list)
 
     # Configure collider (not saved, since it may trigger overload of afs)
     collider, config_sim, config_bb = configure_collider(

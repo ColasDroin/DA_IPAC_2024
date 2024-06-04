@@ -1,3 +1,10 @@
+config_particles:
+  r_min: 2.0
+  r_max: 10.0
+  n_r: 256
+  n_angles: 5
+  n_split: 15
+
 # Configuration for tuning of the collider
 config_collider:
   config_knobs_and_tuning:
@@ -178,7 +185,7 @@ config_simulation:
   collider_file: ../1_build_distr_and_collider/collider/collider.json
 
   # Distribution in the normalized xy space
-  particle_file: ../1_build_distr_and_collider/particles/00.parquet
+  particle_file: ./particles/00.parquet
 
   # Initial off-momentum
   delta_max: 27.e-5
