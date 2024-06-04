@@ -285,8 +285,8 @@ dump_config_in_collider = False
 # optimal DA (e.g. tune, chroma, etc).
 # ==================================================================================================
 TOT_PARTICLES = 256 * 5
-array_n_angles = list(range(5, 51, 30))
-array_repeat = list(range(0, 10, 10))
+array_n_angles = list(range(5, 51, 1))
+array_repeat = list(range(0, 10, 1))
 
 # ==================================================================================================
 # --- Make tree for the simulations (generation 1)
