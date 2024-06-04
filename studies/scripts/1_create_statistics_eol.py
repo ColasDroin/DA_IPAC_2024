@@ -32,10 +32,10 @@ d_config_particles = {}
 # Radius of the initial particle distribution
 d_config_particles["r_min"] = 4
 d_config_particles["r_max"] = 8
-d_config_particles["n_r"] = 256
+d_config_particles["n_r"] = np.nan  # ! Set later
 
 # Number of angles for the initial particle distribution
-d_config_particles["n_angles"] = 5
+d_config_particles["n_angles"] = np.nan  # ! Set later
 
 # Number of split for parallelization
 d_config_particles["n_split"] = 1
@@ -261,7 +261,7 @@ d_config_collider["config_beambeam"] = d_config_beambeam
 d_config_simulation = {}
 
 # Number of turns to track
-d_config_simulation["n_turns"] = 1000000
+d_config_simulation["n_turns"] = 100
 
 # Initial off-momentum
 d_config_simulation["delta_max"] = 27.0e-5
@@ -285,17 +285,8 @@ dump_config_in_collider = False
 # optimal DA (e.g. tune, chroma, etc).
 # ==================================================================================================
 TOT_PARTICLES = 256 * 5
-array_n_angles = list(range(5, 51, 5))
+array_n_angles = list(range(5, 51, 30))
 array_repeat = list(range(10))
-
-
-array_n_r = TOT_PARTICLES // np.array(array_n_angles)
-
-d_config_particles["n_r"] = 256
-
-# Number of angles for the initial particle distribution
-d_config_particles["n_angles"] = 5
-
 
 # ==================================================================================================
 # --- Make tree for the simulations (generation 1)
