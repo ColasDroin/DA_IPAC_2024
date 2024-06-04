@@ -286,7 +286,7 @@ dump_config_in_collider = False
 # ==================================================================================================
 TOT_PARTICLES = 256 * 5
 array_n_angles = list(range(5, 51, 30))
-array_repeat = list(range(10))
+array_repeat = list(range(0, 10, 10))
 
 # ==================================================================================================
 # --- Make tree for the simulations (generation 1)
@@ -321,7 +321,7 @@ for idx_job, (track, n_angles, idx_repeat) in enumerate(
     d_config_particles["idx_repeat"] = idx_repeat
 
     # Complete the dictionnary for the tracking
-    d_config_simulation["particle_file"] = f"../particles/{track:02}.parquet"
+    d_config_simulation["particle_file"] = f"particles/{track:02}.parquet"
     d_config_simulation["collider_file"] = "../collider/collider.json"
 
     # Add a child to the second generation, with all the parameters for the collider and tracking
