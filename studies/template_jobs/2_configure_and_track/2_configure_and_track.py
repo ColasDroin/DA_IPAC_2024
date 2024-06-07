@@ -97,20 +97,23 @@ def build_particle_distribution(config_particles):
     # Define radius distribution
     r_min = config_particles["r_min"]
     r_max = config_particles["r_max"]
-    n_r = config_particles["n_r"]
-    radial_list = np.linspace(r_min, r_max, n_r, endpoint=False)
+    n_part = config_particles["n_part"]
 
-    # Add gaussian noise with std = 0.01 to radial_list
-    radial_list += np.random.normal(0, 0.01, n_r)
-
-    # Define angle distribution
-    n_angles = config_particles["n_angles"]
-    theta_list = np.linspace(0, 90, n_angles + 2)[1:-1]
+    x_coor, y_coor = [], []
+    part_added = 0
+    # Add particles according to a uniform sampling between r_min and r_max
+    while part_added < n_part:
+        x = np.random.uniform(0, r_max)
+        y = np.random.uniform(0, r_max)
+        r = np.sqrt(x**2 + y**2)
+        if r >= r_min and r <= r_max:
+            x_coor.append(x)
+            y_coor.append(y)
+            part_added += 1
 
     # Define particle distribution as a cartesian product of the above
     particle_list = [
-        (particle_id, ii[1], ii[0])
-        for particle_id, ii in enumerate(itertools.product(theta_list, radial_list))
+        (particle_id, ii[1], ii[0]) for particle_id, ii in enumerate(zip(x_coor, y_coor))
     ]
 
     # Split distribution into several chunks for parallelization
@@ -128,7 +131,7 @@ def write_particle_distribution(particle_list):
     for idx_chunk, my_list in enumerate(particle_list):
         pd.DataFrame(
             my_list,
-            columns=["particle_id", "normalized amplitude in xy-plane", "angle in xy-plane [deg]"],
+            columns=["particle_id", "y", "x"],
         ).to_parquet(f"{distributions_folder}/{idx_chunk:02}.parquet")
 
 
@@ -624,15 +627,12 @@ def prepare_particle_distribution(collider, context, config_sim, config_bb):
 
     particle_df = pd.read_parquet(config_sim["particle_file"])
 
-    r_vect = particle_df["normalized amplitude in xy-plane"].values
-    theta_vect = particle_df["angle in xy-plane [deg]"].values * np.pi / 180  # [rad]
-
-    A1_in_sigma = r_vect * np.cos(theta_vect)
-    A2_in_sigma = r_vect * np.sin(theta_vect)
+    x = particle_df["x"].values
+    y = particle_df["y"].values
 
     particles = collider[beam].build_particles(
-        x_norm=A1_in_sigma,
-        y_norm=A2_in_sigma,
+        x_norm=x,
+        y_norm=y,
         delta=config_sim["delta_max"],
         scale_with_transverse_norm_emitt=(config_bb["nemitt_x"], config_bb["nemitt_y"]),
         _context=context,

@@ -30,12 +30,9 @@ from tree_maker import initialize
 d_config_particles = {}
 
 # Radius of the initial particle distribution
-d_config_particles["r_min"] = 4
-d_config_particles["r_max"] = 8
-d_config_particles["n_r"] = 1000  
-
-# Number of angles for the initial particle distribution
-d_config_particles["n_angles"] = 20  
+d_config_particles["r_min"] = 3
+d_config_particles["r_max"] = 9
+d_config_particles["n_part"] = 20000
 
 # Number of split for parallelization
 d_config_particles["n_split"] = 1
@@ -261,7 +258,7 @@ d_config_collider["config_beambeam"] = d_config_beambeam
 d_config_simulation = {}
 
 # Number of turns to track
-d_config_simulation["n_turns"] = 1000000
+d_config_simulation["n_turns"] = 100
 
 # Initial off-momentum
 d_config_simulation["delta_max"] = 27.0e-5
@@ -311,10 +308,7 @@ children["base_collider"]["config_mad"] = d_config_mad
 # ! otherwise the dictionnary will be mutated for all the children.
 # ==================================================================================================
 track_array = np.arange(d_config_particles["n_split"])
-for idx_job, (track, idx_repeat) in enumerate(
-    itertools.product(track_array, array_repeat)
-):
-
+for idx_job, (track, idx_repeat) in enumerate(itertools.product(track_array, array_repeat)):
     d_config_particles["idx_repeat"] = idx_repeat
 
     # Complete the dictionnary for the tracking
