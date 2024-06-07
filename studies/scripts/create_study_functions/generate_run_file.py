@@ -39,10 +39,10 @@ def _generate_run_sh_htc_gen_2(node, python_command):
 
     # Get paths to mutate
     path_collider = config["config_simulation"]["collider_file"]
-    path_particles = config["config_simulation"]["particle_file"]
+    # path_particles = config["config_simulation"]["particle_file"]
     path_log = config["log_file"]
     new_path_collider = f"{abs_path}/{path_collider}"
-    new_path_particles = f"{abs_path}/{path_particles}"
+    # new_path_particles = f"{abs_path}/{path_particles}"
     new_path_log = f"{abs_path}/{path_log}"
 
     # Prepare strings for sec
@@ -65,7 +65,7 @@ def _generate_run_sh_htc_gen_2(node, python_command):
         f"cd {local_path}\n"
         # Mutate the paths in config to be absolute
         f'sed -i "s/{path_collider}/{new_path_collider}/g" config.yaml\n'
-        f'sed -i "s/{path_particles}/{new_path_particles}/g" config.yaml\n'
+        # f'sed -i "s/{path_particles}/{new_path_particles}/g" config.yaml\n'
         f'sed -i "s/{path_log}/{new_path_log}/g" config.yaml\n'
         # Run the job
         f"python {node.get_abs_path()}/{python_command} > output_python.txt 2>"
