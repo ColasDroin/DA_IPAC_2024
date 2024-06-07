@@ -47,10 +47,10 @@ def _generate_run_sh_htc_gen_2(node, python_command):
 
     # Prepare strings for sec
     path_collider = path_collider.replace("/", "\/")
-    path_particles = path_particles.replace("/", "\/")
+    # path_particles = path_particles.replace("/", "\/")
     path_log = path_log.replace("/", "\/")
     new_path_collider = new_path_collider.replace("/", "\/")
-    new_path_particles = new_path_particles.replace("/", "\/")
+    # new_path_particles = new_path_particles.replace("/", "\/")
     new_path_log = new_path_log.replace("/", "\/")
 
     # Return final run script
