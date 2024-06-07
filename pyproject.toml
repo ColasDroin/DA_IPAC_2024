@@ -23,7 +23,7 @@ xtrack = {path = "external_dependencies/xtrack", develop = true}
 tree-maker = {git = "ssh://git@github.com/xsuite/tree_maker.git"}
 ipykernel = "^6.29.3"
 seaborn = "^0.13.2"
-
+cupy-cuda11x = "^13.1.0"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.3"
