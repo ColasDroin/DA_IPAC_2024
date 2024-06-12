@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Animated gif
+*.gif
 
 # Submission files
 studies/submission_files/*
