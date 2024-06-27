@@ -284,8 +284,8 @@ dump_config_in_collider = False
 # Below, the user defines the grid for the machine parameters that must be scanned to find the
 # optimal DA (e.g. tune, chroma, etc).
 # ==================================================================================================
-TOT_PARTICLES = 256 * 5
-array_n_angles = list(range(5, 51, 1))
+PARTICLES_PER_ANGLE = 256
+array_n_angles = list(range(1, 16, 2))
 array_repeat = list(range(0, 10, 1))
 
 # ==================================================================================================
@@ -316,7 +316,7 @@ track_array = np.arange(d_config_particles["n_split"])
 for idx_job, (track, n_angles, idx_repeat) in enumerate(
     itertools.product(track_array, array_n_angles, array_repeat)
 ):
-    d_config_particles["n_r"] = TOT_PARTICLES // n_angles
+    d_config_particles["n_r"] = PARTICLES_PER_ANGLE
     d_config_particles["n_angles"] = n_angles
     d_config_particles["idx_repeat"] = idx_repeat
 
@@ -360,7 +360,7 @@ set_context(children, 1, config)
 # --- Build tree and write it to the filesystem
 # ==================================================================================================
 # Define study name
-study_name = "statistics_eol"
+study_name = "statistics_eol_constant_resolution"
 
 # Creade folder that will contain the tree
 if not os.path.exists(f"../scans/{study_name}"):

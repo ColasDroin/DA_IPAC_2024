@@ -15,4 +15,4 @@
         - misc.py
       run_on: "htc"
       context: "cpu"
-      htc_job_flavor: "tomorrow"
+      htc_job_flavor: "testmatch"
